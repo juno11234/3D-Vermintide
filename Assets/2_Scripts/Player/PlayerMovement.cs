@@ -85,8 +85,6 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            if (Attack2) return;
-
             if (0.1f < normalizedTime && normalizedTime < 0.9f)
             {
                 animator.ResetTrigger(ATTACK);
