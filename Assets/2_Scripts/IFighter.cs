@@ -4,8 +4,8 @@ using UnityEngine;
 
 public interface IFighter
 {    
-    public Collider mainCollider { get; }
-    public GameObject gameObject { get; }
+    public Collider MainCollider { get; }
+    public GameObject GameObject { get; }
     
     public void TakeDamage(int damage);
     

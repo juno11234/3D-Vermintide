@@ -5,20 +5,26 @@ using UnityEngine;
 
 public class Player : MonoBehaviour, IFighter
 {
-    //스탯, 데미지 입기,스킬 효과 
+    //스탯, 데미지 입기,스킬 효과
+    
     private int hp = 100;
     private int guardStamina = 5;
 
-    private static Player CurrentPlayer;
-    GreatSword greatSword;
+    public static Player CurrentPlayer;
+    private GreatSword greatSword;
+
+    private void Awake()
+    {
+        CurrentPlayer = this;
+    }
 
     private void Start()
     {
-        CurrentPlayer = this;
         greatSword = GetComponentInChildren<GreatSword>();
     }
 
-    public Collider mainCollider { get; }
+    public Collider MainCollider { get; }
+    public GameObject GameObject { get; }
 
     public void TakeDamage(int damage)
     {
@@ -35,11 +41,11 @@ public class Player : MonoBehaviour, IFighter
 
     public void AttackStart()
     {
-        greatSword.collider.enabled = true;
+        greatSword.GetComponent<Collider>().enabled = true;
     }
 
     public void AttackEnd()
     {
-        greatSword.collider.enabled = false;
+        greatSword.GetComponent<Collider>().enabled = false;
     }
 }

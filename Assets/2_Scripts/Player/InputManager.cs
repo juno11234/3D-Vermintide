@@ -13,7 +13,7 @@ public class InputManager : MonoBehaviour
     private Vector2 cameraInput;
     private bool isBlock;
 
-    void Awake()
+    private void Awake()
     {
         playerInput = new PlayerInput();
         moveAction = playerInput.PlayerMovement;
@@ -25,7 +25,7 @@ public class InputManager : MonoBehaviour
         Cursor.visible = false;
     }
 
-    void Update()
+    private void Update()
     {
         movement.Move(moveInput);
         movement.Look(cameraInput);
@@ -81,7 +81,7 @@ public class InputManager : MonoBehaviour
 
     private void BlockInput(InputAction.CallbackContext context)
     {
-       movement.Block(true);
+        movement.Block(true);
     }
 
     private void BlockCancel(InputAction.CallbackContext context)

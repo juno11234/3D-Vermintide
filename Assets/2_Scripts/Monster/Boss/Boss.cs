@@ -3,96 +3,82 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Boss : MonoBehaviour
+public class Boss : MonoBehaviour, IFighter
 {
-    //플레이어 추격 사정거리내에 들어오면 공격1,2중 랜덤 시전
-    //hp가 절반 이하되면 새로운 패턴 추가
-    //가드후 패턴파훼시 그로기 아니면 대쉬공격
-    //공격시 플레이어가 뒤로 조금 밀려남
-    //대쉬 공격은 밀려나는 거리증가 
-    public enum BossState
+    public static Boss CurrentBoss;
+    public static readonly int JUMPATTACK = Animator.StringToHash("JumpAttack");
+    public static readonly int FOOTATTACK = Animator.StringToHash("FootAttack");
+    
+
+    public enum Parts
     {
-        Moving,
-        Attacking
+        Unknow,
+        Body,
+        LeftLeg,
+        RightLeg,
+        LeftArm,
+        RightArm,
     }
 
-    private static readonly int SPEED = Animator.StringToHash("Speed");
+    public class BossStat
+    {
+        public int HP { get; set; }
+        public int MaxHP { get; set; }
+    }
 
-    private static readonly int FOOT_ATTACK = Animator.StringToHash("FootAttack");
-    private static readonly int JUMP_ATTACK = Animator.StringToHash("JumpAttack");
 
+    public Collider MainCollider => BossParts.bodyColl;
 
-    [SerializeField]
-    private Player player;
+    public GameObject GameObject => gameObject;
+    public BossStat Stat { get; private set; }
+    public BossState CurrentState { get; private set; }
+    public BossParts BossParts;
+    public Animator animator;
 
-    [SerializeField]
-    private float attackDistance = 10f;
+    private Dictionary<BossState.StateName, BossState> stateDictionary =
+        new Dictionary<BossState.StateName, BossState>();
 
-    private BossState currentState;
-    NavMeshAgent agent;
-    Animator animator;
+    void Awake()
+    {
+        CurrentBoss = this;
+        Stat = new BossStat();
+
+        Stat.HP = 1000;
+        Stat.MaxHP = 1000;
+    }
 
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
-        animator = GetComponent<Animator>();
-        currentState = BossState.Moving;
-    }
+        BossParts.Initialize();
 
-    void Update()
-    {
-        float distance = Vector3.Distance(player.transform.position, transform.position);
+        BossState[] states = GetComponentsInChildren<BossState>();
+        //보스스테이트 상속 스크립트 전부 모음
 
-        switch (currentState)
-        {
-            case BossState.Moving:
-                if (distance <= attackDistance)
-                {
-                    Debug.Log("공격상태전환");
-                    EnterAttackState();
-                }
-
-                else
-                    EnterMoveState();
-
-                break;
-            case BossState.Attacking:
-                if (distance > attackDistance)
-                    EnterMoveState();
-                else
-                    EnterAttackState();
-                break;
+        for (int i = 0; i < states.Length; i++)
+        {//딕셔너리에 이름을 키값으로 넣고 초기화
+            stateDictionary.Add(states[i].Name, states[i]);
+            states[i].Initialize(this);
+            states[i].gameObject.SetActive(false);
         }
+        
+        ChageState(BossState.StateName.ChaseState);
     }
 
-    private void EnterMoveState()
+    public void ChageState(BossState.StateName enterState)
     {
-        currentState = BossState.Moving;
-        agent.isStopped = false;
-        agent.SetDestination(player.transform.position);
-        animator.SetFloat(SPEED, 1f);
-    }
-
-    private void EnterAttackState()
-    {
-        currentState = BossState.Attacking;
-        animator.SetFloat(SPEED, 0f);
-        agent.isStopped = true;
-        agent.ResetPath();
-
-        Attack();
-    }
-
-    private void Attack()
-    {
-        int random = Random.Range(0, 2);
-        if (random == 0)
-        {
-            animator.SetTrigger(FOOT_ATTACK);
+        if (CurrentState != null)
+        {//널이 아니라면 이전 상태 저장하고 비활성화
+            BossState prev = CurrentState;
+            prev.Exit();
+            prev.gameObject.SetActive(false);
         }
-        else
-        {
-            animator.SetTrigger(JUMP_ATTACK);
-        }
+        BossState targetState = stateDictionary[enterState];
+        CurrentState = targetState;
+        targetState.gameObject.SetActive(true);
+        targetState.Enter();
+    }
+
+    public void TakeDamage(int damage)
+    {
     }
 }
