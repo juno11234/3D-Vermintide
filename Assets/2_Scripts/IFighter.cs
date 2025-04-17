@@ -7,6 +7,6 @@ public interface IFighter
     public Collider MainCollider { get; }
     public GameObject GameObject { get; }
     
-    public void TakeDamage(int damage);
+    public void TakeDamage(CombatEvents combatEvent);
     
 }

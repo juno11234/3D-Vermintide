@@ -746,8 +746,8 @@ GameObject:
   - component: {fileID: 2460842998664356090}
   - component: {fileID: 8882799221890135199}
   - component: {fileID: 5804071448662961248}
-  - component: {fileID: 9210231289097443238}
   - component: {fileID: 6471592869778062995}
+  - component: {fileID: 1860385606434192148}
   m_Layer: 0
   m_Name: '@-Great Sword'
   m_TagString: Untagged
@@ -821,8 +821,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &9210231289097443238
-MeshCollider:
+--- !u!114 &6471592869778062995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2464248232889445128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89eb93c485034034aa11af19cce91d5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &1860385606434192148
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -839,22 +851,9 @@ MeshCollider:
   m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 43679318121810524, guid: 8853b485feca9f84c86d745635a2f5ee, type: 2}
---- !u!114 &6471592869778062995
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2464248232889445128}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89eb93c485034034aa11af19cce91d5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  serializedVersion: 3
+  m_Size: {x: 0.16818437, y: 1.6870556, z: 0.051882867}
+  m_Center: {x: -0.011208827, y: 0.710093, z: -0.0000021590524}
 --- !u!1 &2475204272569961741
 GameObject:
   m_ObjectHideFlags: 0
@@ -2316,7 +2315,7 @@ Transform:
   m_GameObject: {fileID: 7758990846101929207}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.5, z: 0.1}
+  m_LocalPosition: {x: 0, y: -1.5, z: 0.175}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

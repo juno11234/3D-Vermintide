@@ -5,19 +5,31 @@ using UnityEngine;
 
 public class GoblinWepon : MonoBehaviour
 {
-  private Collider collider;
+    [SerializeField]
+    private int damage=5;
 
-  private void Start()
-  {
-    collider = GetComponent<Collider>();
-    collider.enabled = false;
-  }
+    private Collider collider;
+    private GoblinBase goblin;
 
-  private void OnTriggerEnter(Collider other)
-  {
-    if (other.CompareTag("Player"))
+    private void Start()
     {
-      Debug.Log("고블린 공격!");
+        collider = GetComponent<Collider>();
+        goblin = GetComponentInParent<GoblinBase>();
+        collider.enabled = false;
     }
-  }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.Equals(Player.CurrentPlayer.MainCollider))
+        {
+            Debug.Log("고블린 공격!");
+            CombatEvents e = new CombatEvents();
+            e.Damage = damage;
+            e.HitPosition = other.ClosestPoint(transform.position);
+            e.Sender = goblin;
+            e.Receiver = Player.CurrentPlayer;
+
+            CombatSystem.Instance.AddInGameEvent(e);
+        }
+    }
 }

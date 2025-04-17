@@ -9,7 +9,7 @@ public class FootAttack : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.Equals(Player.CurrentPlayer.MainCollider))
         {
             Debug.Log("발!");
         }

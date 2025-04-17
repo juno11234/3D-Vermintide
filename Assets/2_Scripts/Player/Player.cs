@@ -6,16 +6,18 @@ using UnityEngine;
 public class Player : MonoBehaviour, IFighter
 {
     //스탯, 데미지 입기
-    
-    private int hp = 100;
+
+    public int hp = 100;
     private int guardStamina = 5;
 
     public static Player CurrentPlayer;
     private GreatSword greatSword;
+    private CharacterController controller;
 
     private void Awake()
     {
         CurrentPlayer = this;
+        controller = GetComponent<CharacterController>();
     }
 
     private void Start()
@@ -23,12 +25,12 @@ public class Player : MonoBehaviour, IFighter
         greatSword = GetComponentInChildren<GreatSword>();
     }
 
-    public Collider MainCollider { get; }
-    public GameObject GameObject { get; }
+    public Collider MainCollider => controller;
+    public GameObject GameObject => gameObject;
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(CombatEvents combatEvent)
     {
-        hp -= damage;
+        hp -= combatEvent.Damage;
         if (hp <= 0)
         {
             Die();

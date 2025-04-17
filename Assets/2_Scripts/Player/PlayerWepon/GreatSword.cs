@@ -18,9 +18,21 @@ public class GreatSword : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy"))
+        if (LayerMask.NameToLayer("Enemy") == other.gameObject.layer)
         {
             Debug.Log("공격!");
+            var monster = CombatSystem.Instance.GetMonsterOrNull(other);
+            if (monster != null)
+            {
+                CombatEvents combatEvents = new CombatEvents();
+                combatEvents.Sender = Player.CurrentPlayer;
+                combatEvents.Receiver = monster;
+                combatEvents.Damage = damage;
+                combatEvents.HitPosition = other.ClosestPoint(transform.position);
+                combatEvents.Collider = other;
+
+                CombatSystem.Instance.AddInGameEvent(combatEvents);
+            }
         }
     }
 }

@@ -8,7 +8,7 @@ public class GoblinBase : MonoBehaviour, IFighter
     protected static readonly int SPEED = Animator.StringToHash("Speed");
     protected static readonly int JUMP = Animator.StringToHash("Jump");
     protected static readonly int ATTACK = Animator.StringToHash("Attack");
-    
+
     [System.Serializable]
     public class GoblinStat
     {
@@ -20,9 +20,12 @@ public class GoblinBase : MonoBehaviour, IFighter
     public Collider MainCollider => collider;
     public GameObject GameObject => gameObject;
 
+
     protected Player player;
+
     [SerializeField]
-    GoblinStat goblinStat;
+    protected GoblinStat goblinStat;
+
     protected Animator animator;
     protected Collider collider;
     protected NavMeshAgent agent;
@@ -38,16 +41,19 @@ public class GoblinBase : MonoBehaviour, IFighter
         player = Player.CurrentPlayer;
         goblinWepon = GetComponentInChildren<GoblinWepon>();
     }
+
+
     private void OnEnable()
     {
         goblinStat.hp = goblinStat.maxHp;
     }
-   protected void Update()
-   {
-       UpdateCustom();
-   }
 
-   protected virtual void UpdateCustom()
+    protected void Update()
+    {
+        UpdateCustom();
+    }
+
+    protected virtual void UpdateCustom()
     {
         float distance = Vector3.Distance(player.transform.position, transform.position);
         currentState = animator.GetCurrentAnimatorStateInfo(0);
@@ -73,6 +79,7 @@ public class GoblinBase : MonoBehaviour, IFighter
             StartCoroutine(Jump());
         }
     }
+
     protected IEnumerator Jump()
     {
         isJumping = true;
@@ -95,6 +102,7 @@ public class GoblinBase : MonoBehaviour, IFighter
         agent.CompleteOffMeshLink();
         isJumping = false;
     }
+
     protected void Attack()
     {
         if (currentState.IsName("Jump")) return;
@@ -108,6 +116,7 @@ public class GoblinBase : MonoBehaviour, IFighter
 
         animator.SetTrigger(ATTACK);
     }
+
     public void WeponCollOn()
     {
         goblinWepon.GetComponent<Collider>().enabled = true;
@@ -118,14 +127,15 @@ public class GoblinBase : MonoBehaviour, IFighter
         goblinWepon.GetComponent<Collider>().enabled = false;
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(CombatEvents combatEvent)
     {
-        goblinStat.hp -= damage;
+        goblinStat.hp -= combatEvent.Damage;
         if (goblinStat.hp <= 0)
         {
             Die();
         }
     }
+
     protected void Die()
     {
     }

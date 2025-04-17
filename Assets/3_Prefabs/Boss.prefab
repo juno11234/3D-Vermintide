@@ -1391,7 +1391,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2981992051308864776}
   - component: {fileID: 1530951262494241234}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Spine_03
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -1513,7 +1513,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6737236333969204570}
   - component: {fileID: 3524595955597353635}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Elbow_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1782,7 +1782,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7448340481436809097}
   - component: {fileID: 2924891498660258638}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Elbow_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2035,7 +2035,7 @@ GameObject:
   m_Component:
   - component: {fileID: 162458865217297352}
   - component: {fileID: 1375981805632306558}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LowerLeg_R
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -2218,7 +2218,7 @@ GameObject:
   m_Component:
   - component: {fileID: 811471568748299365}
   - component: {fileID: 7319931576424148397}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LowerLeg_L
   m_TagString: Enemy
   m_Icon: {fileID: 0}
