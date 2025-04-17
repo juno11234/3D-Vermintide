@@ -452,6 +452,7 @@ GameObject:
   - component: {fileID: 3683963615303568786}
   - component: {fileID: 6482215860189108629}
   - component: {fileID: 3810391631379594899}
+  - component: {fileID: 313072326404043947}
   m_Layer: 0
   m_Name: SM_Wep_Goblin_Bone_Axe_01
   m_TagString: Untagged
@@ -539,13 +540,25 @@ MeshCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 43868357210826470, guid: 34a352dd5dcf3834e8f6e8ab24055a0a, type: 2}
+--- !u!114 &313072326404043947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1471199156229770257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51609ab108034ee44a48b9a5c600269e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1874230874525371334
 GameObject:
   m_ObjectHideFlags: 0
@@ -998,10 +1011,10 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.3
-  m_Speed: 3.5
-  m_Acceleration: 8
+  m_Speed: 6
+  m_Acceleration: 1000
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 1000
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
@@ -1045,10 +1058,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73d8cf229cc250749b5a14efb39389a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 452863872498504035}
-  collider: {fileID: 6077227114511944892}
-  agent: {fileID: 8777860632993427597}
-  player: {fileID: 0}
+  goblinStat:
+    hp: 40
+    maxHp: 40
+    range: 1.5
 --- !u!1 &3157991253460128944
 GameObject:
   m_ObjectHideFlags: 0

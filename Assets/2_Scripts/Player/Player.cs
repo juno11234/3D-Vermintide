@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour, IFighter
 {
-    //스탯, 데미지 입기,스킬 효과
+    //스탯, 데미지 입기
     
     private int hp = 100;
     private int guardStamina = 5;

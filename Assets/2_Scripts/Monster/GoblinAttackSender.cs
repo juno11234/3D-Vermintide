@@ -2,41 +2,64 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAttackSender : StateMachineBehaviour
+public class GoblinAttackSender : StateMachineBehaviour
 {
     [Range(0f, 1f)]
     public float startNormalizedTime = 0f;
 
     private bool passStartNormalizedTime;
 
+
     [Range(0f, 1f)]
     public float endNormalizedTime = 0f;
-    
+
     private bool passEndNormalizedTime;
-    
-    private Player player;
+
+    [Range(0f, 1f)]
+    public float secondStartNormalizedTime = 0f;
+
+    private bool secondPassStartNormalizedTime;
+
+    [Range(0f, 1f)]
+    public float secondEndNormalizedTime = 0f;
+
+    private bool secondPassEndNormalizedTime;
+
+    private GoblinBase goblin;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         passStartNormalizedTime = false;
         passEndNormalizedTime = false;
-        player = animator.gameObject.GetComponentInParent<Player>();
+        secondPassStartNormalizedTime = false;
+        secondPassEndNormalizedTime = false;
+        goblin = animator.GetComponent<GoblinBase>();
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (!passStartNormalizedTime && startNormalizedTime < stateInfo.normalizedTime)
+        if (passStartNormalizedTime == false && startNormalizedTime < stateInfo.normalizedTime)
         {
-            player.AttackStart();
+            goblin.WeponCollOn();
             passStartNormalizedTime = true;
         }
 
-        if (!passEndNormalizedTime && endNormalizedTime < stateInfo.normalizedTime)
+        if (passEndNormalizedTime == false && endNormalizedTime < stateInfo.normalizedTime)
         {
-            player.AttackEnd();
+            goblin.WeponCollOff();
             passEndNormalizedTime = true;
+        }
+
+        if (secondPassStartNormalizedTime == false && secondStartNormalizedTime < stateInfo.normalizedTime)
+        {
+            goblin.WeponCollOn();
+        }
+
+        if (secondPassEndNormalizedTime == false && secondEndNormalizedTime < stateInfo.normalizedTime)
+        {
+            goblin.WeponCollOff();
         }
     }
 
