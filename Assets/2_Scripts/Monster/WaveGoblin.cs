@@ -7,5 +7,9 @@ using UnityEngine.AI;
 
 public class WaveGoblin : GoblinBase
 {
-    
+    protected new void Start()
+    {
+        base.Start(); // GoblinBase 초기화
+        CombatSystem.Instance.RegisterMonster(this);
+    }
 }

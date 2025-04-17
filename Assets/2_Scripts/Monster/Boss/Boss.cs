@@ -30,21 +30,25 @@ public class Boss : MonoBehaviour, IFighter
     public Collider MainCollider => BossParts.bodyColl;
 
     public GameObject GameObject => gameObject;
+
     public BossStat Stat { get; private set; }
+
     public BossState CurrentState { get; private set; }
     public BossParts BossParts;
     public Animator animator;
+    public bool isDead { get; private set; }
 
     private Dictionary<BossState.StateName, BossState> stateDictionary =
         new Dictionary<BossState.StateName, BossState>();
 
     void Awake()
     {
+        isDead = false;
         CurrentBoss = this;
         Stat = new BossStat();
 
-        Stat.HP = 1000;
-        Stat.MaxHP = 1000;
+        Stat.HP = 10;
+        Stat.MaxHP = 10;
     }
 
     void Start()
@@ -87,6 +91,7 @@ public class Boss : MonoBehaviour, IFighter
 
     public void TakeDamage(CombatEvents combatEvent)
     {
+        if (isDead) return;
         Stat.HP -= combatEvent.Damage;
         Debug.Log(Stat.HP);
         if (Stat.HP <= 0)
@@ -97,5 +102,7 @@ public class Boss : MonoBehaviour, IFighter
 
     private void Die()
     {
+        animator.SetTrigger("Dead");
+        isDead = true;
     }
 }

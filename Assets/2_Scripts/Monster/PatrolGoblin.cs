@@ -18,7 +18,12 @@ public class PatrolGoblin : GoblinBase
     private Vector3 direction;
     int destinationIndex = 0;
 
-    
+    protected new void Start()
+    {
+        base.Start(); // GoblinBase 초기화
+        CombatSystem.Instance.RegisterMonster(this);
+    }
+
     protected override void UpdateCustom()
     {
         if (isChasing) base.UpdateCustom();

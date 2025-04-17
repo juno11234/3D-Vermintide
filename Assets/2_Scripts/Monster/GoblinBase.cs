@@ -32,6 +32,7 @@ public class GoblinBase : MonoBehaviour, IFighter
     protected bool isJumping = false;
     protected AnimatorStateInfo currentState;
     protected GoblinWepon goblinWepon;
+    protected bool isDead = false;
 
     protected void Start()
     {
@@ -50,6 +51,7 @@ public class GoblinBase : MonoBehaviour, IFighter
 
     protected void Update()
     {
+        if (isDead) return;
         UpdateCustom();
     }
 
@@ -129,6 +131,7 @@ public class GoblinBase : MonoBehaviour, IFighter
 
     public void TakeDamage(CombatEvents combatEvent)
     {
+        if (isDead) return;
         goblinStat.hp -= combatEvent.Damage;
         if (goblinStat.hp <= 0)
         {
@@ -138,5 +141,8 @@ public class GoblinBase : MonoBehaviour, IFighter
 
     protected void Die()
     {
+        animator.SetTrigger("Dead");
+        isDead = true;
+        collider.enabled = false;
     }
 }
