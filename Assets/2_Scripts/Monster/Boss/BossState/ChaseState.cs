@@ -51,7 +51,7 @@ public class ChaseState : BossState
 
     public override void Enter()
     {
-        Debug.Log("Chase Enter");
+        //Debug.Log("Chase Enter");
     }
 
     public override void Exit()

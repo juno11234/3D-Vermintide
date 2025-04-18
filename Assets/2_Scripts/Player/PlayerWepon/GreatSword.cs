@@ -32,7 +32,7 @@ public class GreatSword : MonoBehaviour
     private bool isGuarding = false;
     private Animator animator;
     public GreatSwordSkill skill;
-    public ParticleSystem skillEffect;
+    
 
     private void Start()
     {
@@ -78,7 +78,7 @@ public class GreatSword : MonoBehaviour
 
         int staminaConsume = damage / 5;
         currentStamina -= staminaConsume;
-        Debug.Log(currentStamina);
+       //Debug.Log(currentStamina);
         if (currentStamina <= 0)
         {
             animator.SetBool("Block", false);
@@ -100,7 +100,7 @@ public class GreatSword : MonoBehaviour
     {
         if (currentSkillGage >= maxSkillGage)
         {
-            skillEffect.Play();
+            
             currentSkillGage = 0;
             return true;
         }

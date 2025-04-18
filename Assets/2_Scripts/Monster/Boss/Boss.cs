@@ -93,7 +93,7 @@ public class Boss : MonoBehaviour, IFighter
     {
         if (isDead) return;
         Stat.HP -= combatEvent.Damage;
-        Debug.Log(Stat.HP);
+        //Debug.Log(Stat.HP);
         if (Stat.HP <= 0)
         {
             Die();
