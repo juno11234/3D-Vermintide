@@ -918,7 +918,7 @@ GameObject:
   - component: {fileID: 8148108191897115829}
   - component: {fileID: 735778803587093352}
   m_Layer: 6
-  m_Name: Wave_Monster_Goblin
+  m_Name: Wave_Monster_Goblin_1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

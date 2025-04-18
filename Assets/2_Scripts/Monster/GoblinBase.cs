@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public abstract class GoblinBase : MonoBehaviour, IFighter
+public abstract class GoblinBase : MonoBehaviour, IFighter, IObjectPoolItem
 {
     protected static readonly int SPEED = Animator.StringToHash("Speed");
     protected static readonly int JUMP = Animator.StringToHash("Jump");
@@ -18,8 +18,8 @@ public abstract class GoblinBase : MonoBehaviour, IFighter
     }
 
     public Collider MainCollider => collider;
+    public string Key { get; set; }
     public GameObject GameObject => gameObject;
-
 
     protected Player player;
 
@@ -33,6 +33,7 @@ public abstract class GoblinBase : MonoBehaviour, IFighter
     protected AnimatorStateInfo currentState;
     protected GoblinWepon goblinWepon;
     protected bool isDead = false;
+
 
     protected void Start()
     {
@@ -147,5 +148,16 @@ public abstract class GoblinBase : MonoBehaviour, IFighter
         isDead = true;
         collider.enabled = false;
         agent.enabled = false;
+        
+        ReturnToPool();
+        gameObject.SetActive(false);
+    }
+
+    public void ReturnToPool()
+    {
+        isDead = false;
+        collider.enabled = true;
+        agent.enabled = true;
+        ObjectPoolManager.Instance.ReturnToPool(this);
     }
 }

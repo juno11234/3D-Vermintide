@@ -918,7 +918,7 @@ GameObject:
   - component: {fileID: 735778803587093352}
   - component: {fileID: 7592819135290837453}
   m_Layer: 6
-  m_Name: Patrol_Monster_Goblin 1
+  m_Name: Patrol_Monster_Goblin_1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
