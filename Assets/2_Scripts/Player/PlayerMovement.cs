@@ -93,26 +93,19 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    public void Block(bool isBlock)
+    public void Guard(bool isBlock)
     {
-        if (isBlock)
-        {
-            animator.SetBool(BLOCK, true);
-        }
-        else
-        {
-            animator.SetBool(BLOCK, false);
-        }
+        animator.SetBool(BLOCK, isBlock);
     }
 
     public void Skill()
     {
         if (animator.IsInTransition(0)) return;
-        
+
         var currentAnimState = animator.GetCurrentAnimatorStateInfo(0);
-        bool Skill = currentAnimState.IsName("Skill");
-        
-        if (Skill) return;
+        bool skill = currentAnimState.IsName("Skill");
+
+        if (skill) return;
         animator.SetTrigger(SKILL);
     }
 }

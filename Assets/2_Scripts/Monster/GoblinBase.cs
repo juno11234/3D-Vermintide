@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class GoblinBase : MonoBehaviour, IFighter
+public abstract class GoblinBase : MonoBehaviour, IFighter
 {
     protected static readonly int SPEED = Animator.StringToHash("Speed");
     protected static readonly int JUMP = Animator.StringToHash("Jump");
@@ -144,5 +144,6 @@ public class GoblinBase : MonoBehaviour, IFighter
         animator.SetTrigger("Dead");
         isDead = true;
         collider.enabled = false;
+        agent.enabled = false;
     }
 }

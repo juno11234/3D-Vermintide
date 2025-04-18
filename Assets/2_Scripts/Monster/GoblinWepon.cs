@@ -22,7 +22,7 @@ public class GoblinWepon : MonoBehaviour
     {
         if (other.Equals(Player.CurrentPlayer.MainCollider))
         {
-            Debug.Log("고블린 공격!");
+           // Debug.Log("고블린 공격!");
             CombatEvents e = new CombatEvents();
             e.Damage = damage;
             e.HitPosition = other.ClosestPoint(transform.position);

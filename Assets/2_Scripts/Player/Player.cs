@@ -2,20 +2,28 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Player : MonoBehaviour, IFighter
 {
     //스탯, 데미지 입기
-
-    public int hp = 100;
-    private int guardStamina = 5;
+    [System.Serializable]
+    public class PlayerStat
+    {
+        public int hp = 100;
+        public int maxHp = 100;
+    }
 
     public static Player CurrentPlayer;
     private GreatSword greatSword;
     private CharacterController controller;
+    private bool isDead = false;
+    public PlayerStat stat;
 
     private void Awake()
     {
+        stat = new PlayerStat();
+        stat.hp = stat.maxHp;
         CurrentPlayer = this;
         controller = GetComponent<CharacterController>();
     }
@@ -30,8 +38,13 @@ public class Player : MonoBehaviour, IFighter
 
     public void TakeDamage(CombatEvents combatEvent)
     {
-        hp -= combatEvent.Damage;
-        if (hp <= 0)
+        if (greatSword.TryGuard(combatEvent.Damage) || isDead)
+        {
+            return;
+        }
+
+        stat.hp -= combatEvent.Damage;
+        if (stat.hp <= 0)
         {
             Die();
         }
@@ -39,6 +52,7 @@ public class Player : MonoBehaviour, IFighter
 
     private void Die()
     {
+        isDead = true;
     }
 
     public void AttackStart()
@@ -49,5 +63,15 @@ public class Player : MonoBehaviour, IFighter
     public void AttackEnd()
     {
         greatSword.GetComponent<Collider>().enabled = false;
+    }
+
+    public void SkillStart()
+    {
+        greatSword.skill.gameObject.SetActive(true);
+    }
+
+    public void SkillEnd()
+    {
+        greatSword.skill.gameObject.SetActive(false);
     }
 }

@@ -11,7 +11,7 @@ public class InputManager : MonoBehaviour
     private PlayerMovement movement;
     private Vector2 moveInput;
     private Vector2 cameraInput;
-    private bool isBlock;
+    public GreatSword sword;
 
     private void Awake()
     {
@@ -81,12 +81,15 @@ public class InputManager : MonoBehaviour
 
     private void BlockInput(InputAction.CallbackContext context)
     {
-        movement.Block(true);
+        if (sword.currentStamina <= 0) return;
+
+        sword.GuardState(true);
+        movement.Guard(true);
     }
 
     private void BlockCancel(InputAction.CallbackContext context)
     {
-        movement.Block(false);
+        movement.Guard(false);
     }
 
     private void SkillInput(InputAction.CallbackContext context)
