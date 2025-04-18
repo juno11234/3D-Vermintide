@@ -10,6 +10,7 @@ public class CombatSystem : MonoBehaviour
     public class Callbacks
     {
         public Action<CombatEvents> OnCombatEvent;
+        public Action<EnemyDieEvents> OnEnemyDieEvents;
     }
 
     public static CombatSystem Instance;
@@ -19,7 +20,7 @@ public class CombatSystem : MonoBehaviour
 
     private Queue<InGameEvent> inGameEventQueue = new Queue<InGameEvent>();
 
-    private readonly Callbacks Events = new Callbacks();
+    public readonly Callbacks Events = new Callbacks();
 
     private void Awake()
     {
@@ -40,6 +41,10 @@ public class CombatSystem : MonoBehaviour
                     var combatEvent = inGameEvent as CombatEvents;
                     inGameEvent.Receiver.TakeDamage(combatEvent);
                     Events.OnCombatEvent?.Invoke(combatEvent);
+                    break;
+                case InGameEvent.EventType.EnemyDie:
+                    var enemyDieEvents = inGameEvent as EnemyDieEvents;
+                    Events.OnEnemyDieEvents?.Invoke(enemyDieEvents);
                     break;
             }
 

@@ -141,6 +141,8 @@ public abstract class GoblinBase : MonoBehaviour, IFighter
 
     protected void Die()
     {
+        EnemyDieEvents e = new EnemyDieEvents();
+        CombatSystem.Instance.AddInGameEvent(e);
         animator.SetTrigger("Dead");
         isDead = true;
         collider.enabled = false;

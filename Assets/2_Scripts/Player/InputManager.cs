@@ -94,6 +94,7 @@ public class InputManager : MonoBehaviour
 
     private void SkillInput(InputAction.CallbackContext context)
     {
+        if (sword.CheckCoolTimeSkillAble() == false) return;
         movement.Skill();
     }
 

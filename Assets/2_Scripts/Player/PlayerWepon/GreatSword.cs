@@ -20,26 +20,36 @@ public class GreatSword : MonoBehaviour
     [SerializeField]
     private int maxGuardStamina = 4;
 
+    [FormerlySerializedAs("maxSkillCooldown")]
+    [FormerlySerializedAs("maXskillCooldown")]
+    [SerializeField]
+    private float maxSkillGage = 90f;
+
     public int currentStamina { get; private set; }
     private float regenTimer;
+    private float currentSkillGage;
     private bool inCooldown = false;
     private bool isGuarding = false;
     private Animator animator;
     public GreatSwordSkill skill;
+    public ParticleSystem skillEffect;
 
     private void Start()
     {
         animator = GetComponentInParent<Animator>();
         currentStamina = maxGuardStamina;
+        currentSkillGage = maxSkillGage;
         collider = GetComponent<Collider>();
         collider.enabled = false;
         skill = GetComponentInChildren<GreatSwordSkill>();
         skill.gameObject.SetActive(false);
+        CombatSystem.Instance.Events.OnEnemyDieEvents += SkillGagePlus;
     }
 
     private void Update()
     {
         GuardStaminaRegen();
+        SkillGageUpdate();
     }
 
     public void GuardState(bool guarding)
@@ -84,6 +94,32 @@ public class GreatSword : MonoBehaviour
         inCooldown = true;
         yield return new WaitForSeconds(staminaCooldown);
         inCooldown = false;
+    }
+
+    public bool CheckCoolTimeSkillAble()
+    {
+        if (currentSkillGage >= maxSkillGage)
+        {
+            skillEffect.Play();
+            currentSkillGage = 0;
+            return true;
+        }
+
+        return false;
+    }
+
+    private void SkillGageUpdate()
+    {
+        currentSkillGage += Time.deltaTime;
+        if (currentSkillGage >= maxSkillGage)
+        {
+            currentSkillGage = maxSkillGage;
+        }
+    }
+
+    private void SkillGagePlus(EnemyDieEvents enemyDieEvents)
+    {
+        currentSkillGage += 0.5f;
     }
 
     private void OnTriggerEnter(Collider other)

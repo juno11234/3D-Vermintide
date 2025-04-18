@@ -8,6 +8,7 @@ public abstract class InGameEvent
     {
         Unknown,
         Combat,
+        EnemyDie
     }
 
     public IFighter Sender { get; set; }
@@ -21,4 +22,9 @@ public class CombatEvents : InGameEvent
     public Vector3 HitPosition { get; set; }
     public Collider Collider { get; set; }
     public override EventType Type => EventType.Combat;
+}
+
+public class EnemyDieEvents : InGameEvent
+{
+    public override EventType Type => EventType.EnemyDie;
 }
