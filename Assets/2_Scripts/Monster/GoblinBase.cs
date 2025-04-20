@@ -148,9 +148,14 @@ public abstract class GoblinBase : MonoBehaviour, IFighter, IObjectPoolItem
         isDead = true;
         collider.enabled = false;
         agent.enabled = false;
-        
+
+        StartCoroutine(DieDelay());
+    }
+
+    IEnumerator DieDelay()
+    {
+        yield return new WaitForSeconds(3f);
         ReturnToPool();
-        gameObject.SetActive(false);
     }
 
     public void ReturnToPool()
