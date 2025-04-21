@@ -8,6 +8,8 @@ public abstract class GoblinBase : MonoBehaviour, IFighter, IObjectPoolItem
     protected static readonly int SPEED = Animator.StringToHash("Speed");
     protected static readonly int JUMP = Animator.StringToHash("Jump");
     protected static readonly int ATTACK = Animator.StringToHash("Attack");
+    private static readonly int HIT = Animator.StringToHash("Hit");
+    private static readonly int DEAD = Animator.StringToHash("Dead");
 
     [System.Serializable]
     public class GoblinStat
@@ -110,6 +112,7 @@ public abstract class GoblinBase : MonoBehaviour, IFighter, IObjectPoolItem
     {
         if (currentState.IsName("Jump")) return;
 
+
         animator.SetFloat(SPEED, 0f);
         agent.isStopped = true;
 
@@ -130,21 +133,23 @@ public abstract class GoblinBase : MonoBehaviour, IFighter, IObjectPoolItem
         goblinWepon.GetComponent<Collider>().enabled = false;
     }
 
-    public void TakeDamage(CombatEvents combatEvent)
+    public virtual void TakeDamage(CombatEvents combatEvent)
     {
         if (isDead) return;
         goblinStat.hp -= combatEvent.Damage;
+
         if (goblinStat.hp <= 0)
         {
             Die();
         }
+        else animator.SetTrigger(HIT);
     }
 
     protected void Die()
     {
         EnemyDieEvents e = new EnemyDieEvents();
         CombatSystem.Instance.AddInGameEvent(e);
-        animator.SetTrigger("Dead");
+        animator.SetTrigger(DEAD);
         isDead = true;
         collider.enabled = false;
         agent.enabled = false;
