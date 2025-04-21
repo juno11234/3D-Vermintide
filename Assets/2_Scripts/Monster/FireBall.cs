@@ -9,10 +9,10 @@ public class FireBall : MonoBehaviour
     public float speed = 10f;
     public float duration = 3f;
     public ShamonGoblin shamonGoblin;
+    public ParticleSystem explosion;
 
     private void OnEnable()
     {
-        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -24,7 +24,7 @@ public class FireBall : MonoBehaviour
             e.HitPosition = other.ClosestPoint(transform.position);
             e.Sender = shamonGoblin;
             e.Receiver = Player.CurrentPlayer;
-
+            explosion.Play();
             CombatSystem.Instance.AddInGameEvent(e);
         }
     }
