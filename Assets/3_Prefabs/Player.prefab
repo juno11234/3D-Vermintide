@@ -35241,7 +35241,6 @@ MonoBehaviour:
   maxGuardStamina: 4
   maxSkillGage: 2
   skill: {fileID: 0}
-  skillEffect: {fileID: 1594343763828314668}
 --- !u!65 &1860385606434192148
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -80112,7 +80111,7 @@ GameObject:
   - component: {fileID: 4495073421504372287}
   - component: {fileID: 2212921985425126413}
   m_Layer: 0
-  m_Name: GreatSwordAttack2
+  m_Name: GreatSwordAttack1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -90126,8 +90125,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8979539048194529307}
-  - {fileID: 3645540369755843365}
   - {fileID: 5825929948435318455}
+  - {fileID: 3645540369755843365}
   m_Father: {fileID: 6393703457137324639}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5621439163782583796
@@ -125799,7 +125798,7 @@ GameObject:
   - component: {fileID: 8369833006912189632}
   - component: {fileID: 5238646324784144035}
   m_Layer: 0
-  m_Name: GreatSwordAttack1
+  m_Name: GreatSwordAttack2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
