@@ -25,16 +25,13 @@ public class WaveSystem : MonoBehaviour
         public float waveDelay;
         public int spawnAmount;
         public float defalutWaveEliteRate;
-        public int eliteSpawnAmount;
+
         public float eliteWaveRate;
+        public int eliteSpawnAmount;
     }
 
     public WaveSetting set;
 
-    private void Awake()
-    {
-        set = new WaveSetting();
-    }
 
     void Update()
     {

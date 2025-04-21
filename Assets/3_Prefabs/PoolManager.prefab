@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4241524733466564568
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1660732112350554487}
+  - component: {fileID: 8817563191268392837}
+  m_Layer: 0
+  m_Name: PoolManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1660732112350554487
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4241524733466564568}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.368044, y: -0.7082958, z: -3.039894}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8817563191268392837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4241524733466564568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d3ade52c425d954ab89684502ed6e1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObjectPoolDatas:
+  - Key: Goblin_1
+    Prefab: {fileID: 4695364229230301723, guid: aeaadb9063fc20f488e79b745aca5138, type: 3}
+    ExpandSize: 60
+    Parent: {fileID: 1660732112350554487}
+  - Key: Goblin_2
+    Prefab: {fileID: 3013121357060944080, guid: a3f58c3414692834baa07c5948c2ddc7, type: 3}
+    ExpandSize: 60
+    Parent: {fileID: 1660732112350554487}
+  - Key: Goblin_Elite
+    Prefab: {fileID: 2271884593270564407, guid: 835eb9b255c92f94d8a9f321f90dbb15, type: 3}
+    ExpandSize: 10
+    Parent: {fileID: 1660732112350554487}
+  - Key: Goblin_Shamon
+    Prefab: {fileID: 7656056336263378022, guid: 9450b7e1b6a1b5347a9b7663bb061b48, type: 3}
+    ExpandSize: 6
+    Parent: {fileID: 1660732112350554487}

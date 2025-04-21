@@ -47,8 +47,8 @@ public class Boss : MonoBehaviour, IFighter
         CurrentBoss = this;
         Stat = new BossStat();
 
-        Stat.HP = 10;
-        Stat.MaxHP = 10;
+        Stat.HP = 500;
+        Stat.MaxHP = 500;
     }
 
     void Start()
