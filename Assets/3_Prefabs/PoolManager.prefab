@@ -57,7 +57,7 @@ MonoBehaviour:
     Prefab: {fileID: 2271884593270564407, guid: 835eb9b255c92f94d8a9f321f90dbb15, type: 3}
     ExpandSize: 10
     Parent: {fileID: 1660732112350554487}
-  - Key: Goblin_Shamon
+  - Key: Goblin_Shaman
     Prefab: {fileID: 7656056336263378022, guid: 9450b7e1b6a1b5347a9b7663bb061b48, type: 3}
     ExpandSize: 6
     Parent: {fileID: 1660732112350554487}

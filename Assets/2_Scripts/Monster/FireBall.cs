@@ -10,9 +10,24 @@ public class FireBall : MonoBehaviour
     public float duration = 3f;
     public ShamonGoblin shamonGoblin;
     public ParticleSystem explosion;
+    public ParticleSystem fireball;
+    float currentTime = 0f;
 
     private void OnEnable()
     {
+        Vector3 target = Player.CurrentPlayer.transform.position + Vector3.up * 1.5f;
+        Vector3 direction = (target - transform.position).normalized;
+        transform.forward = direction;
+    }
+
+    private void Update()
+    {
+        transform.Translate(transform.forward * (speed * Time.deltaTime), Space.World);
+        currentTime += Time.deltaTime;
+        if (currentTime >= duration)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -25,7 +40,11 @@ public class FireBall : MonoBehaviour
             e.Sender = shamonGoblin;
             e.Receiver = Player.CurrentPlayer;
             explosion.Play();
+            fireball.Stop();
+            fireball.Clear();
             CombatSystem.Instance.AddInGameEvent(e);
+
+            
         }
     }
 }

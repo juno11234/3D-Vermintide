@@ -73,6 +73,7 @@ MonoBehaviour:
   duration: 3
   shamonGoblin: {fileID: 7184634167701913823, guid: 9450b7e1b6a1b5347a9b7663bb061b48, type: 3}
   explosion: {fileID: 4327653860355214065}
+  fireball: {fileID: 1663923694105432017}
 --- !u!1001 &1573789635644709753
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -161,6 +162,11 @@ PrefabInstance:
 --- !u!4 &1574268201202374333 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4457159321914820, guid: 4b21d5ab091be5a46ad6e87699fab62c, type: 3}
+  m_PrefabInstance: {fileID: 1573789635644709753}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &1663923694105432017 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 198238224484258984, guid: 4b21d5ab091be5a46ad6e87699fab62c, type: 3}
   m_PrefabInstance: {fileID: 1573789635644709753}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4525778833070546239

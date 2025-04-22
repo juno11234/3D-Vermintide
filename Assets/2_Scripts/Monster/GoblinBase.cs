@@ -145,7 +145,7 @@ public abstract class GoblinBase : MonoBehaviour, IFighter, IObjectPoolItem
         else animator.SetTrigger(HIT);
     }
 
-    protected void Die()
+    protected virtual void Die()
     {
         EnemyDieEvents e = new EnemyDieEvents();
         CombatSystem.Instance.AddInGameEvent(e);

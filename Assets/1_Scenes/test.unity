@@ -1330,63 +1330,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 412902, guid: 456cf52a7c6401b4ea47e0d58329a624, type: 3}
   m_PrefabInstance: {fileID: 625301609}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1641622139
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1199041657773117522, guid: 410ba07f3a252cb4aaed062901bded58, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -11.74
-      objectReference: {fileID: 0}
-    - target: {fileID: 1199041657773117522, guid: 410ba07f3a252cb4aaed062901bded58, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.023
-      objectReference: {fileID: 0}
-    - target: {fileID: 1199041657773117522, guid: 410ba07f3a252cb4aaed062901bded58, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -1.62
-      objectReference: {fileID: 0}
-    - target: {fileID: 1199041657773117522, guid: 410ba07f3a252cb4aaed062901bded58, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1199041657773117522, guid: 410ba07f3a252cb4aaed062901bded58, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1199041657773117522, guid: 410ba07f3a252cb4aaed062901bded58, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1199041657773117522, guid: 410ba07f3a252cb4aaed062901bded58, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1199041657773117522, guid: 410ba07f3a252cb4aaed062901bded58, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1199041657773117522, guid: 410ba07f3a252cb4aaed062901bded58, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1199041657773117522, guid: 410ba07f3a252cb4aaed062901bded58, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6801752712328695402, guid: 410ba07f3a252cb4aaed062901bded58, type: 3}
-      propertyPath: m_Name
-      value: FireBall
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 410ba07f3a252cb4aaed062901bded58, type: 3}
 --- !u!1 &1748610908
 GameObject:
   m_ObjectHideFlags: 0
@@ -1895,6 +1838,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PoolManager
       objectReference: {fileID: 0}
+    - target: {fileID: 8817563191268392837, guid: 6a4966de8b35d104a9dcd65f2cabe1f9, type: 3}
+      propertyPath: ObjectPoolDatas.Array.data[3].Key
+      value: Goblin_Shaman
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2090,4 +2037,3 @@ SceneRoots:
   - {fileID: 5461067898170920140}
   - {fileID: 1460422725}
   - {fileID: 1374668627484180156}
-  - {fileID: 1641622139}
