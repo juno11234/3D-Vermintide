@@ -69,16 +69,16 @@ public class PlayerMovement : MonoBehaviour
 
     public void Attack()
     {
-        if (animator.IsInTransition(0)) return;
-        var currentAnimState = animator.GetCurrentAnimatorStateInfo(0);
+        // if (animator.IsInTransition(0)) return;
+        // var currentAnimState = animator.GetCurrentAnimatorStateInfo(0);
+        //
+        // bool Attack1 = currentAnimState.IsName("Attack1");
+        // bool Attack2 = currentAnimState.IsName("Attack2");
+        // bool isAttack = Attack1 || Attack2;
+        //
+        // float normalizedTime = currentAnimState.normalizedTime;
 
-        bool Attack1 = currentAnimState.IsName("Attack1");
-        bool Attack2 = currentAnimState.IsName("Attack2");
-        bool isAttack = Attack1 || Attack2;
-
-        float normalizedTime = currentAnimState.normalizedTime;
-
-        if (isAttack == false)
+        /*if (isAttack == false)
         {
             animator.ResetTrigger(ATTACK);
             animator.SetTrigger(ATTACK);
@@ -90,7 +90,9 @@ public class PlayerMovement : MonoBehaviour
                 animator.ResetTrigger(ATTACK);
                 animator.SetTrigger(ATTACK);
             }
-        }
+        }*/
+        animator.ResetTrigger(ATTACK);
+        animator.SetTrigger(ATTACK);
     }
 
     public void Guard(bool isBlock)

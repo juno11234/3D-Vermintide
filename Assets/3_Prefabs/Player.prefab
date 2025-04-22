@@ -35466,6 +35466,7 @@ MonoBehaviour:
   maxGuardStamina: 4
   maxSkillGage: 90
   currentSkillGage: 0
+  isGuarding: 0
   skill: {fileID: 0}
 --- !u!65 &1860385606434192148
 BoxCollider:
@@ -105503,7 +105504,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1575312338791727252
 RectTransform:
   m_ObjectHideFlags: 0
@@ -126248,6 +126249,12 @@ MonoBehaviour:
   player: {fileID: 8812526802581196642}
   skillSlider: {fileID: 3444138611469699485}
   greatSword: {fileID: 6471592869778062995}
+  guardGageImage:
+  - {fileID: 874355137090755983}
+  - {fileID: 7198707180625512786}
+  - {fileID: 6842852888023160428}
+  - {fileID: 1872800320696411720}
+  guardGage: {fileID: 6855816283363795341}
 --- !u!1 &8568234410337486436
 GameObject:
   m_ObjectHideFlags: 0
