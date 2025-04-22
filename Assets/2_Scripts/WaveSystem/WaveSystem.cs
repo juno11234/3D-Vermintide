@@ -24,9 +24,14 @@ public class WaveSystem : MonoBehaviour
         public int eliteSpawnAmount = 10;
     }
 
+    public static WaveSystem Instance;
     public WaveSetting set;
     private Transform[] nearPoint;
 
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     void Update()
     {
@@ -56,13 +61,14 @@ public class WaveSystem : MonoBehaviour
         {
             for (int i = 0; i < set.spawnAmount; i++)
             {
-                DefaultWave();
+                DefaultWave(nearPoint[0].position);
+                DefaultWave(nearPoint[1].position);
                 yield return new WaitForSeconds(0.3f);
             }
         }
     }
 
-    private void DefaultWave()
+    private void DefaultWave(Vector3 spawnPoint)
     {
         IObjectPoolItem horde;
 
@@ -77,8 +83,7 @@ public class WaveSystem : MonoBehaviour
             horde = ObjectPoolManager.Instance.GetObjectOrNull(goblinType);
         }
 
-        horde.GameObject.transform.position = nearPoint[1].position;
-        horde.GameObject.transform.position = nearPoint[2].position;
+        horde.GameObject.transform.position = spawnPoint;
         horde.GameObject.SetActive(true);
     }
 
@@ -89,7 +94,7 @@ public class WaveSystem : MonoBehaviour
         string eliteType = Random.Range(0, 2) == 0 ? "Goblin_Elite" : "Goblin_Shaman";
 
         horde = ObjectPoolManager.Instance.GetObjectOrNull(eliteType);
-        horde.GameObject.transform.position = nearPoint[1].position;
+        horde.GameObject.transform.position = nearPoint[0].position;
         horde.GameObject.SetActive(true);
     }
 

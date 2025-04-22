@@ -16,20 +16,16 @@ public class GreatSword : MonoBehaviour
 
     [SerializeField]
     private float staminaRegenTime = 1f;
-
-    [SerializeField]
-    private int maxGuardStamina = 4;
-
-    [FormerlySerializedAs("maxSkillCooldown")]
-    [FormerlySerializedAs("maXskillCooldown")]
-    [SerializeField]
-    private float maxSkillGage = 90f;
+    
+    public int maxGuardStamina = 4;
+  
+    public float maxSkillGage = 90f;
 
     public int currentStamina { get; private set; }
     private float regenTimer;
-    private float currentSkillGage;
+    public float currentSkillGage;
     private bool inCooldown = false;
-    private bool isGuarding = false;
+    public bool isGuarding = false;
     private Animator animator;
     public GreatSwordSkill skill;
     
@@ -78,7 +74,7 @@ public class GreatSword : MonoBehaviour
 
         int staminaConsume = damage / 5;
         currentStamina -= staminaConsume;
-       //Debug.Log(currentStamina);
+       
         if (currentStamina <= 0)
         {
             animator.SetBool("Block", false);

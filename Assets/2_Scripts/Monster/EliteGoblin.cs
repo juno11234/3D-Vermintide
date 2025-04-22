@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class EliteGoblin : GoblinBase
 {
-    ParticleSystem particle;
+   public GameObject particle;
 
     protected new void Start()
     {
-        particle = GetComponentInChildren<ParticleSystem>();
+        
         base.Start(); // GoblinBase 초기화
         CombatSystem.Instance.RegisterMonster(this);
     }
@@ -22,13 +22,11 @@ public class EliteGoblin : GoblinBase
         if (goblinStat.hp <= 0)
         {
             Die();
+            particle.SetActive(false);
         }
     }
-
-    protected override void Die()
+    private void OnEnable()
     {
-        base.Start();
-        particle.Stop();
-        particle.Clear();
+        particle.SetActive(true);
     }
 }

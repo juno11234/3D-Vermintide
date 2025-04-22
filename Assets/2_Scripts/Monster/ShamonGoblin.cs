@@ -5,25 +5,36 @@ using UnityEngine.Serialization;
 
 public class ShamonGoblin : GoblinBase
 {
-    
     public GameObject fireBallPrefabs;
     public Transform firePoint;
-    ParticleSystem particle;
+    public GameObject particle;
+
     protected new void Start()
     {
-        particle =GetComponentInChildren<ParticleSystem>();
         base.Start(); // GoblinBase 초기화
         CombatSystem.Instance.RegisterMonster(this);
     }
 
     public void Fire()
     {
-        Instantiate(fireBallPrefabs,firePoint.position,Quaternion.identity);
+        Instantiate(fireBallPrefabs, firePoint.position, Quaternion.identity);
     }
-    protected override void Die()
+
+    public override void TakeDamage(CombatEvents combatEvent)
     {
-        base.Start();
-        particle.Stop();
-        particle.Clear();
+        if (isDead) return;
+        goblinStat.hp -= combatEvent.Damage;
+
+        if (goblinStat.hp <= 0)
+        {
+            Die();
+            particle.SetActive(false);
+        }
+        else animator.SetTrigger(HIT);
+    }
+
+    private void OnEnable()
+    {
+        particle.SetActive(true);
     }
 }

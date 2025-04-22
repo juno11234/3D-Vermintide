@@ -11,6 +11,7 @@ public class WaveTrigger : MonoBehaviour
         if (other.Equals(Player.CurrentPlayer.MainCollider))
         {
             waveSystem.WaveStart();
+            Destroy(gameObject);
         }
     }
 }

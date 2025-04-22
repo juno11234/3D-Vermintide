@@ -6689,7 +6689,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1345308816901474122
 Transform:
   m_ObjectHideFlags: 0
@@ -6819,6 +6819,7 @@ MonoBehaviour:
     range: 10
   fireBallPrefabs: {fileID: 6801752712328695402, guid: 410ba07f3a252cb4aaed062901bded58, type: 3}
   firePoint: {fileID: 6350145812130038428}
+  particle: {fileID: 7789652488922126826}
 --- !u!1 &7789652488922126826
 GameObject:
   m_ObjectHideFlags: 0

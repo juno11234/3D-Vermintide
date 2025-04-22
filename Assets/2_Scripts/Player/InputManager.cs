@@ -89,6 +89,7 @@ public class InputManager : MonoBehaviour
 
     private void BlockCancel(InputAction.CallbackContext context)
     {
+        sword.GuardState(false);
         movement.Guard(false);
     }
 

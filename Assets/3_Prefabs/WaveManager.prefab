@@ -45,10 +45,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   set:
-    spawnPoint: []
+    spawnPoint:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
     lastWaveTimer: 0
     waveDelay: 180
-    spawnAmount: 30
-    defalutWaveEliteRate: 3
-    eliteWaveRate: 0.5
+    spawnAmount: 20
+    defalutWaveEliteRate: 10
+    eliteWaveRate: 10
     eliteSpawnAmount: 10

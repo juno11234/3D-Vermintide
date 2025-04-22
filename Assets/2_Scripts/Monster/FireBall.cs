@@ -43,8 +43,6 @@ public class FireBall : MonoBehaviour
             fireball.Stop();
             fireball.Clear();
             CombatSystem.Instance.AddInGameEvent(e);
-
-            
         }
     }
 }
