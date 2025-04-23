@@ -33,6 +33,8 @@ public class InputManager : MonoBehaviour
         }
         movement.Move(moveInput);
         movement.Look(cameraInput);
+        
+        
     }
 
     private void OnEnable()
@@ -46,6 +48,8 @@ public class InputManager : MonoBehaviour
         moveAction.Block.performed += BlockInput;
         moveAction.Block.canceled += BlockCancel;
         moveAction.Skill.performed += SkillInput;
+        moveAction.CursorOn.performed+=CursorOn;
+        moveAction.CursorOn.canceled+=CursorOff;
     }
 
     private void OnDisable()
@@ -101,6 +105,18 @@ public class InputManager : MonoBehaviour
     {
         if (sword.CheckCoolTimeSkillAble() == false) return;
         movement.Skill();
+    }
+
+    private void CursorOn(InputAction.CallbackContext context)
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
+    private void CursorOff(InputAction.CallbackContext context)
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     #endregion

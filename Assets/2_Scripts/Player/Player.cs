@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
+using DG.Tweening;
 
 public class Player : MonoBehaviour, IFighter
 {
@@ -56,13 +57,21 @@ public class Player : MonoBehaviour, IFighter
     private void Die()
     {
         isDead = true;
-        StartCoroutine(DieCoroutine());
+        // StartCoroutine(DieCoroutine());
+        Vector3 currentEuler = transform.eulerAngles;
+        Vector3 targetEuler = new Vector3(currentEuler.x, currentEuler.y, 90f);
+
+        transform
+            .DORotate(targetEuler, 1f / stat.dieSpeed)
+            .SetEase(Ease.OutBounce)
+            .OnComplete(() => { SceneManager.LoadScene(1); });
     }
 
     IEnumerator DieCoroutine()
     {
-        Quaternion current = Quaternion.Euler(0, 0, 0);
-        Quaternion die = Quaternion.Euler(0, 0, 90);
+        Quaternion current = transform.rotation;
+        Vector3 currentEuler = transform.rotation.eulerAngles;
+        Quaternion die = Quaternion.Euler(currentEuler.x, currentEuler.y, 90);
 
         float elapsed = 0f;
         while (elapsed < 1f)
