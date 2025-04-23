@@ -102,7 +102,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Skill()
     {
-        if (animator.IsInTransition(0)) return;
+        //if (animator.IsInTransition(0)) return;
 
         var currentAnimState = animator.GetCurrentAnimatorStateInfo(0);
         bool skill = currentAnimState.IsName("Skill");

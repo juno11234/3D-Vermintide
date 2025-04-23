@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
 public class Player : MonoBehaviour, IFighter
@@ -10,14 +11,16 @@ public class Player : MonoBehaviour, IFighter
     [System.Serializable]
     public class PlayerStat
     {
+        public float dieSpeed = 0.5f;
         public int hp = 100;
         public int maxHp = 100;
     }
 
+
     public static Player CurrentPlayer;
     private GreatSword greatSword;
     private CharacterController controller;
-    private bool isDead = false;
+    public bool isDead { get; private set; }
     public PlayerStat stat;
 
     private void Awake()
@@ -53,6 +56,24 @@ public class Player : MonoBehaviour, IFighter
     private void Die()
     {
         isDead = true;
+        StartCoroutine(DieCoroutine());
+    }
+
+    IEnumerator DieCoroutine()
+    {
+        Quaternion current = Quaternion.Euler(0, 0, 0);
+        Quaternion die = Quaternion.Euler(0, 0, 90);
+
+        float elapsed = 0f;
+        while (elapsed < 1f)
+        {
+            elapsed += Time.deltaTime * stat.dieSpeed;
+            transform.rotation = Quaternion.Lerp(current, die, elapsed);
+            yield return null;
+        }
+
+        transform.rotation = die;
+        SceneManager.LoadScene(1);
     }
 
     public void AttackStart()

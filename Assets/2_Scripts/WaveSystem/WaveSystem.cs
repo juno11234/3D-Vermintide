@@ -37,17 +37,17 @@ public class WaveSystem : MonoBehaviour
     {
         set.lastWaveTimer += Time.deltaTime;
         if (set.lastWaveTimer < set.waveDelay) return;
-        WaveStart();
+        WaveStart(set.spawnAmount);
     }
 
-    public void WaveStart()
+    public void WaveStart(int amount)
     {
         set.lastWaveTimer = 0f;
         nearPoint = SpawnPointSet();
-        StartCoroutine(SpawnDelay());
+        StartCoroutine(SpawnDelay(amount));
     }
 
-    IEnumerator SpawnDelay()
+    IEnumerator SpawnDelay(int amount)
     {
         if (Random.value <= set.eliteWaveRate / 100f)
         {
@@ -59,7 +59,7 @@ public class WaveSystem : MonoBehaviour
         }
         else
         {
-            for (int i = 0; i < set.spawnAmount; i++)
+            for (int i = 0; i < amount; i++)
             {
                 DefaultWave(nearPoint[0].position);
                 DefaultWave(nearPoint[1].position);

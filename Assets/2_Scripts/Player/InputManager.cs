@@ -27,6 +27,10 @@ public class InputManager : MonoBehaviour
 
     private void Update()
     {
+        if (Player.CurrentPlayer.isDead)
+        {
+            this.enabled = false;
+        }
         movement.Move(moveInput);
         movement.Look(cameraInput);
     }

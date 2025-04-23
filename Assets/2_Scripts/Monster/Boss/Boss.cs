@@ -104,5 +104,6 @@ public class Boss : MonoBehaviour, IFighter
     {
         animator.SetTrigger("Dead");
         isDead = true;
+        
     }
 }
