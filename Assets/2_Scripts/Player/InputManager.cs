@@ -12,6 +12,7 @@ public class InputManager : MonoBehaviour
     private Vector2 moveInput;
     private Vector2 cameraInput;
     public GreatSword sword;
+    private bool UIcursor = false;
 
     private void Awake()
     {
@@ -31,10 +32,10 @@ public class InputManager : MonoBehaviour
         {
             this.enabled = false;
         }
+
+        movement.ShowInteractText();
         movement.Move(moveInput);
         movement.Look(cameraInput);
-        
-        
     }
 
     private void OnEnable()
@@ -48,8 +49,9 @@ public class InputManager : MonoBehaviour
         moveAction.Block.performed += BlockInput;
         moveAction.Block.canceled += BlockCancel;
         moveAction.Skill.performed += SkillInput;
-        moveAction.CursorOn.performed+=CursorOn;
-        moveAction.CursorOn.canceled+=CursorOff;
+        moveAction.CursorOn.performed += CursorOn;
+        moveAction.CursorOn.canceled += CursorOff;
+        moveAction.Interact.performed += InteractInput;
     }
 
     private void OnDisable()
@@ -63,6 +65,9 @@ public class InputManager : MonoBehaviour
         moveAction.Block.performed -= BlockInput;
         moveAction.Block.canceled -= BlockCancel;
         moveAction.Skill.performed -= SkillInput;
+        moveAction.CursorOn.performed -= CursorOn;
+        moveAction.CursorOn.canceled -= CursorOff;
+        moveAction.Interact.performed -= InteractInput;
     }
 
     #region inputSetting
@@ -74,6 +79,7 @@ public class InputManager : MonoBehaviour
 
     private void CameraInput(InputAction.CallbackContext context)
     {
+        if (UIcursor) return;
         cameraInput = context.ReadValue<Vector2>();
     }
 
@@ -84,6 +90,7 @@ public class InputManager : MonoBehaviour
 
     private void AttackInput(InputAction.CallbackContext context)
     {
+        if (UIcursor) return;
         movement.Attack();
     }
 
@@ -109,14 +116,21 @@ public class InputManager : MonoBehaviour
 
     private void CursorOn(InputAction.CallbackContext context)
     {
+        UIcursor = true;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
 
     private void CursorOff(InputAction.CallbackContext context)
     {
+        UIcursor = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+    }
+
+    private void InteractInput(InputAction.CallbackContext context)
+    {
+        movement.TryInteract();
     }
 
     #endregion

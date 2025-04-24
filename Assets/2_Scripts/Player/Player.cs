@@ -54,7 +54,7 @@ public class Player : MonoBehaviour, IFighter
         }
     }
 
-    private void Die()
+    public void Die()
     {
         isDead = true;
         // StartCoroutine(DieCoroutine());

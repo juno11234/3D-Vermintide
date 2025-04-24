@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -21,15 +22,23 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     float gravity = -9.81f;
 
+    [SerializeField]
+    float interactDistance = 1.5f;
+
+    [SerializeField]
+    private TMP_Text interactText;
+
     CharacterController controller;
     Animator animator;
     Camera cam;
     float xRotation;
     bool isGrounded;
     Vector3 velocity;
+    private IInteractable currentInteractable;
 
     public void Initialized()
     {
+        interactText.gameObject.SetActive(false);
         controller = GetComponent<CharacterController>();
         cam = Camera.main;
         animator = GetComponentInChildren<Animator>();
@@ -109,5 +118,30 @@ public class PlayerMovement : MonoBehaviour
 
         if (skill) return;
         animator.SetTrigger(SKILL);
+    }
+
+    public void ShowInteractText()
+    {
+        Ray ray = new Ray(cam.transform.position, cam.transform.forward);
+        if (Physics.Raycast(ray, out RaycastHit hit, interactDistance, LayerMask.GetMask("Interactables")))
+        {
+            var interactable = hit.collider.GetComponent<IInteractable>();
+            if (interactable != null)
+            {
+                currentInteractable = interactable;
+                interactText.gameObject.SetActive(true);
+                string text = interactable.InteractText();
+                interactText.text = text;
+                return;
+            }
+        }
+
+        currentInteractable = null;
+        interactText.gameObject.SetActive(false);
+    }
+
+    public void TryInteract()
+    {
+        currentInteractable?.Interact();
     }
 }
