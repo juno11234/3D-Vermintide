@@ -91,6 +91,15 @@ public class Player : MonoBehaviour, IFighter
         skill.gameObject.SetActive(false);
     }
 
+    public void Heal(int amount)
+    {
+        stat.hp += amount;
+        if (stat.hp > stat.maxHp)
+        {
+            stat.hp = stat.maxHp;
+        }
+    }
+
     public void TakeDamage(CombatEvents combatEvent)
     {
         if (currentWeapon is GreatSword sword && sword.TryGuard(combatEvent.Damage))

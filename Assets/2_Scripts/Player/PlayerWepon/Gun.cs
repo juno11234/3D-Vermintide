@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Gun : WeaponBase
 {
@@ -25,23 +27,33 @@ public class Gun : WeaponBase
     [SerializeField]
     private ParticleSystem muzzleFlash;
 
-    public int TotalAmmo => totalAmmo;
-    public int CurrentAmmo => currentAmmo;
+    [SerializeField]
+    private TMP_Text ammoText;
+    
     private int currentAmmo;
     private bool isReloading = false;
     private Animator animator;
 
+    private void Awake()
+    {
+        currentAmmo = maxAmmo;
+    }
     private void Start()
     {
         gameObject.SetActive(false);
-        currentAmmo = maxAmmo;
         animator = GetComponentInParent<Animator>();
+    }
+
+    private void OnEnable()
+    {
+        UpdateAmmoText();
     }
 
     public override void Attack()
     {
         if (isReloading || currentAmmo <= 0) return;
         currentAmmo--;
+        UpdateAmmoText();
         muzzleFlash.Play();
         Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
         if (Physics.Raycast(ray, out RaycastHit hit, attackDistance))
@@ -82,6 +94,17 @@ public class Gun : WeaponBase
 
         currentAmmo += ammoToReload;
         totalAmmo -= ammoToReload;
+        UpdateAmmoText();
         isReloading = false;
+    }
+
+    private void UpdateAmmoText()
+    {
+        ammoText.text = $"{currentAmmo} / {totalAmmo}";
+    }
+
+    public void GetAmmo(int ammo)
+    {
+        totalAmmo += ammo;
     }
 }
