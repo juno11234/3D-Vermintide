@@ -96,8 +96,6 @@ public class GreatSword : MonoBehaviour
     {
         if (currentSkillGage >= maxSkillGage)
         {
-            
-            currentSkillGage = 0;
             return true;
         }
 
