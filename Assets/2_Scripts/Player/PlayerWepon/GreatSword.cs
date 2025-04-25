@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class GreatSword : MonoBehaviour
+public class GreatSword : MonoBehaviour, IWeapon
 {
     //무기 데미지, 가드, 스킬등을 담당
 
@@ -16,9 +16,8 @@ public class GreatSword : MonoBehaviour
 
     [SerializeField]
     private float staminaRegenTime = 1f;
-    
+
     public int maxGuardStamina = 4;
-  
     public float maxSkillGage = 90f;
 
     public int currentStamina { get; private set; }
@@ -26,10 +25,13 @@ public class GreatSword : MonoBehaviour
     public float currentSkillGage;
     private bool inCooldown = false;
     public bool isGuarding = false;
+
     private Animator animator;
     public GreatSwordSkill skill;
-    
 
+    public WeaponType weaponType => WeaponType.Sword;
+    public Animator weaponAnimator => animator;
+    
     private void Start()
     {
         animator = GetComponentInParent<Animator>();
@@ -48,9 +50,20 @@ public class GreatSword : MonoBehaviour
         SkillGageUpdate();
     }
 
-    public void GuardState(bool guarding)
+    public void Attack()
+    {
+        collider.enabled = true;
+    }
+
+    public void Guard(bool guarding)
     {
         isGuarding = guarding;
+    }
+
+    public void Skill()
+    {
+        if(CheckCoolTimeSkillAble()==false)return;
+        skill.gameObject.SetActive(true);
     }
 
     private void GuardStaminaRegen()
@@ -74,7 +87,7 @@ public class GreatSword : MonoBehaviour
 
         int staminaConsume = damage / 5;
         currentStamina -= staminaConsume;
-       
+
         if (currentStamina <= 0)
         {
             animator.SetBool("Block", false);
@@ -94,12 +107,7 @@ public class GreatSword : MonoBehaviour
 
     public bool CheckCoolTimeSkillAble()
     {
-        if (currentSkillGage >= maxSkillGage)
-        {
-            return true;
-        }
-
-        return false;
+        return currentSkillGage >= maxSkillGage;
     }
 
     private void SkillGageUpdate()
@@ -135,4 +143,8 @@ public class GreatSword : MonoBehaviour
             }
         }
     }
+    
+    public void Reload()
+    {
+    }// 근접무기라 안씀
 }

@@ -11,7 +11,8 @@ public class InputManager : MonoBehaviour
     private PlayerMovement movement;
     private Vector2 moveInput;
     private Vector2 cameraInput;
-    public GreatSword sword;
+    public IWeapon currentWeapon;
+    
     private bool UIcursor = false;
 
     private void Awake()
@@ -49,6 +50,7 @@ public class InputManager : MonoBehaviour
         moveAction.Block.performed += BlockInput;
         moveAction.Block.canceled += BlockCancel;
         moveAction.Skill.performed += SkillInput;
+        moveAction.Reload.performed += ReloadInput;
         moveAction.CursorOn.performed += CursorOn;
         moveAction.CursorOn.canceled += CursorOff;
         moveAction.Interact.performed += InteractInput;
@@ -65,6 +67,7 @@ public class InputManager : MonoBehaviour
         moveAction.Block.performed -= BlockInput;
         moveAction.Block.canceled -= BlockCancel;
         moveAction.Skill.performed -= SkillInput;
+        moveAction.Reload.performed -= ReloadInput;
         moveAction.CursorOn.performed -= CursorOn;
         moveAction.CursorOn.canceled -= CursorOff;
         moveAction.Interact.performed -= InteractInput;
@@ -96,7 +99,7 @@ public class InputManager : MonoBehaviour
 
     private void BlockInput(InputAction.CallbackContext context)
     {
-        if (sword.currentStamina <= 0) return;
+        if (currentWeapon.weaponType == WeaponType.Sword && Sword.currentStamina <= 0) return;
 
         sword.GuardState(true);
         movement.Guard(true);
@@ -112,6 +115,11 @@ public class InputManager : MonoBehaviour
     {
         if (sword.CheckCoolTimeSkillAble() == false) return;
         movement.Skill();
+    }
+
+    private void ReloadInput(InputAction.CallbackContext context)
+    {
+        
     }
 
     private void CursorOn(InputAction.CallbackContext context)

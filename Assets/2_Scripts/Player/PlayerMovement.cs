@@ -78,28 +78,6 @@ public class PlayerMovement : MonoBehaviour
 
     public void Attack()
     {
-        // if (animator.IsInTransition(0)) return;
-        // var currentAnimState = animator.GetCurrentAnimatorStateInfo(0);
-        //
-        // bool Attack1 = currentAnimState.IsName("Attack1");
-        // bool Attack2 = currentAnimState.IsName("Attack2");
-        // bool isAttack = Attack1 || Attack2;
-        //
-        // float normalizedTime = currentAnimState.normalizedTime;
-
-        /*if (isAttack == false)
-        {
-            animator.ResetTrigger(ATTACK);
-            animator.SetTrigger(ATTACK);
-        }
-        else
-        {
-            if (0.1f < normalizedTime && normalizedTime < 0.9f)
-            {
-                animator.ResetTrigger(ATTACK);
-                animator.SetTrigger(ATTACK);
-            }
-        }*/
         animator.ResetTrigger(ATTACK);
         animator.SetTrigger(ATTACK);
     }
@@ -111,8 +89,6 @@ public class PlayerMovement : MonoBehaviour
 
     public void Skill()
     {
-        //if (animator.IsInTransition(0)) return;
-
         var currentAnimState = animator.GetCurrentAnimatorStateInfo(0);
         bool skill = currentAnimState.IsName("Skill");
 

@@ -98,6 +98,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Reload"",
+                    ""type"": ""Button"",
+                    ""id"": ""129586ae-3bba-4bdc-a581-0719a5ededea"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -232,6 +241,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""CursorOn"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6ca3dba0-f1cd-4ae0-9a5a-6ae20b3bc4de"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -248,6 +268,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_PlayerMovement_Skill = m_PlayerMovement.FindAction("Skill", throwIfNotFound: true);
         m_PlayerMovement_Interact = m_PlayerMovement.FindAction("Interact", throwIfNotFound: true);
         m_PlayerMovement_CursorOn = m_PlayerMovement.FindAction("CursorOn", throwIfNotFound: true);
+        m_PlayerMovement_Reload = m_PlayerMovement.FindAction("Reload", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -317,6 +338,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerMovement_Skill;
     private readonly InputAction m_PlayerMovement_Interact;
     private readonly InputAction m_PlayerMovement_CursorOn;
+    private readonly InputAction m_PlayerMovement_Reload;
     public struct PlayerMovementActions
     {
         private @PlayerInput m_Wrapper;
@@ -329,6 +351,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @Skill => m_Wrapper.m_PlayerMovement_Skill;
         public InputAction @Interact => m_Wrapper.m_PlayerMovement_Interact;
         public InputAction @CursorOn => m_Wrapper.m_PlayerMovement_CursorOn;
+        public InputAction @Reload => m_Wrapper.m_PlayerMovement_Reload;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMovement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -362,6 +385,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @CursorOn.started += instance.OnCursorOn;
             @CursorOn.performed += instance.OnCursorOn;
             @CursorOn.canceled += instance.OnCursorOn;
+            @Reload.started += instance.OnReload;
+            @Reload.performed += instance.OnReload;
+            @Reload.canceled += instance.OnReload;
         }
 
         private void UnregisterCallbacks(IPlayerMovementActions instance)
@@ -390,6 +416,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @CursorOn.started -= instance.OnCursorOn;
             @CursorOn.performed -= instance.OnCursorOn;
             @CursorOn.canceled -= instance.OnCursorOn;
+            @Reload.started -= instance.OnReload;
+            @Reload.performed -= instance.OnReload;
+            @Reload.canceled -= instance.OnReload;
         }
 
         public void RemoveCallbacks(IPlayerMovementActions instance)
@@ -417,5 +446,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnSkill(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnCursorOn(InputAction.CallbackContext context);
+        void OnReload(InputAction.CallbackContext context);
     }
 }

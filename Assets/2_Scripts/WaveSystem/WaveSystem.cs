@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class WaveSystem : MonoBehaviour
@@ -17,7 +18,7 @@ public class WaveSystem : MonoBehaviour
         public Transform[] spawnPoint;
         public float lastWaveTimer = 0f;
         public float waveDelay;
-        public int spawnAmount;
+        public int timerWaveAmount;
         public float defalutWaveEliteRate;
 
         public float eliteWaveRate = 10;
@@ -37,7 +38,7 @@ public class WaveSystem : MonoBehaviour
     {
         set.lastWaveTimer += Time.deltaTime;
         if (set.lastWaveTimer < set.waveDelay) return;
-        WaveStart(set.spawnAmount);
+        WaveStart(set.timerWaveAmount);
     }
 
     public void WaveStart(int amount)

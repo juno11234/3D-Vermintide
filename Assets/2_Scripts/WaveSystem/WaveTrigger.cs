@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class WaveTrigger : MonoBehaviour
 {
-   public WaveSystem waveSystem;
+  
    public int waveAmountSet;
     private void OnTriggerEnter(Collider other)
     {
         if (other.Equals(Player.CurrentPlayer.MainCollider))
         {
-            waveSystem.WaveStart(waveAmountSet);
+            WaveSystem.Instance.WaveStart(waveAmountSet);
             Destroy(gameObject);
         }
     }
