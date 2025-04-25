@@ -5,11 +5,7 @@ using TMPro;
 
 public class PlayerMovement : MonoBehaviour
 {
-    //이동 로직과 애니메이션
-    private static readonly int ATTACK = Animator.StringToHash("Attack");
-    private static readonly int BLOCK = Animator.StringToHash("Block");
-    private static readonly int SKILL = Animator.StringToHash("Skill");
-
+    //이동로직과 상호작용
     [SerializeField]
     float moveSpeed = 6f;
 
@@ -29,7 +25,6 @@ public class PlayerMovement : MonoBehaviour
     private TMP_Text interactText;
 
     CharacterController controller;
-    Animator animator;
     Camera cam;
     float xRotation;
     bool isGrounded;
@@ -41,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
         interactText.gameObject.SetActive(false);
         controller = GetComponent<CharacterController>();
         cam = Camera.main;
-        animator = GetComponentInChildren<Animator>();
+       
     }
 
     public void Move(Vector2 input)
@@ -75,26 +70,7 @@ public class PlayerMovement : MonoBehaviour
             velocity.y = Mathf.Sqrt(jumpHeight * -1f * gravity);
         }
     }
-
-    public void Attack()
-    {
-        animator.ResetTrigger(ATTACK);
-        animator.SetTrigger(ATTACK);
-    }
-
-    public void Guard(bool isBlock)
-    {
-        animator.SetBool(BLOCK, isBlock);
-    }
-
-    public void Skill()
-    {
-        var currentAnimState = animator.GetCurrentAnimatorStateInfo(0);
-        bool skill = currentAnimState.IsName("Skill");
-
-        if (skill) return;
-        animator.SetTrigger(SKILL);
-    }
+    
 
     public void ShowInteractText()
     {

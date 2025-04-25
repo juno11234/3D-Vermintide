@@ -1,25 +1,26 @@
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class GreatSword : MonoBehaviour
+public class GreatSword : WeaponBase
 {
+    private static readonly int ATTACK = Animator.StringToHash("Attack");
+    private static readonly int BLOCK = Animator.StringToHash("Block");
+    private static readonly int SKILL = Animator.StringToHash("Skill");
+
     //무기 데미지, 가드, 스킬등을 담당
-
-    private Collider collider;
-    private int damage = 10;
-
     [SerializeField]
     private float staminaCooldown = 3f;
 
     [SerializeField]
     private float staminaRegenTime = 1f;
-    
+
+    private Collider collider;
+    private int damage = 10;
+
     public int maxGuardStamina = 4;
-  
     public float maxSkillGage = 90f;
 
     public int currentStamina { get; private set; }
@@ -28,7 +29,6 @@ public class GreatSword : MonoBehaviour
     private bool inCooldown = false;
     public bool isGuarding = false;
     private Animator animator;
-    public GreatSwordSkill skill;
     
 
     private void Start()
@@ -36,10 +36,12 @@ public class GreatSword : MonoBehaviour
         animator = GetComponentInParent<Animator>();
         currentStamina = maxGuardStamina;
         currentSkillGage = maxSkillGage;
+
         collider = GetComponent<Collider>();
         collider.enabled = false;
-        skill = GetComponentInChildren<GreatSwordSkill>();
-        skill.gameObject.SetActive(false);
+
+       
+
         CombatSystem.Instance.Events.OnEnemyDieEvents += SkillGagePlus;
     }
 
@@ -49,37 +51,72 @@ public class GreatSword : MonoBehaviour
         SkillGageUpdate();
     }
 
-    public void GuardState(bool guarding)
+    //공격로직
+    public override void Attack()
     {
-        isGuarding = guarding;
+        animator.ResetTrigger(ATTACK);
+        animator.SetTrigger(ATTACK);
     }
 
-    private void GuardStaminaRegen()
+    public override void OnAttackStart()
     {
-        if (inCooldown) return;
-
-        if (currentStamina < maxGuardStamina)
-        {
-            regenTimer += Time.deltaTime;
-            if (regenTimer >= staminaRegenTime)
-            {
-                currentStamina++;
-                regenTimer = 0f;
-            }
-        }
+        collider.enabled = true;
     }
 
+    public override void OnAttackEnd()
+    {
+        collider.enabled = false;
+    }
+
+    //스킬로직
+    public override void Skill()
+    {
+        if (CanSkill() == false) return;
+        currentSkillGage = 0;
+        animator.SetTrigger(SKILL);
+    }
+
+    public override bool CanSkill()
+    {
+        return currentSkillGage >= maxSkillGage;
+    }
+
+    private void SkillGageUpdate()
+    {
+        currentSkillGage += Time.deltaTime;
+        currentSkillGage = Mathf.Min(currentSkillGage, maxSkillGage);
+    }
+
+    private void SkillGagePlus(EnemyDieEvents enemyDieEvents)
+    {
+        currentSkillGage += 0.5f;
+    }
+
+    //가드로직
+    public override void Guard(bool isGuard)
+    {
+        if (CanGuard() == false) return;
+
+        isGuarding = isGuard;
+        animator.SetBool(BLOCK, isGuard);
+    }
+
+    public override bool CanGuard()
+    {
+        return currentStamina > 0 && inCooldown == false;
+    }
+    
     public bool TryGuard(int damage)
     {
-        if (inCooldown || isGuarding == false) return false;
+        if (CanGuard() == false || isGuarding == false) return false;
 
         int staminaConsume = damage / 5;
         currentStamina -= staminaConsume;
-       
+
         if (currentStamina <= 0)
         {
-            animator.SetBool("Block", false);
             currentStamina = 0;
+            animator.SetBool(BLOCK, false);
             StartCoroutine(GuardCoolCorutine());
         }
 
@@ -93,30 +130,18 @@ public class GreatSword : MonoBehaviour
         inCooldown = false;
     }
 
-    public bool CheckCoolTimeSkillAble()
+    private void GuardStaminaRegen()
     {
-        if (currentSkillGage >= maxSkillGage)
-        {
-            return true;
-        }
+        if (inCooldown || currentStamina >= maxGuardStamina) return;
 
-        return false;
-    }
-
-    private void SkillGageUpdate()
-    {
-        currentSkillGage += Time.deltaTime;
-        if (currentSkillGage >= maxSkillGage)
+        regenTimer += Time.deltaTime;
+        if (regenTimer >= staminaRegenTime)
         {
-            currentSkillGage = maxSkillGage;
+            currentStamina++;
+            regenTimer = 0f;
         }
     }
-
-    private void SkillGagePlus(EnemyDieEvents enemyDieEvents)
-    {
-        currentSkillGage += 0.5f;
-    }
-
+    
     private void OnTriggerEnter(Collider other)
     {
         if (LayerMask.NameToLayer("Enemy") == other.gameObject.layer)
@@ -136,4 +161,4 @@ public class GreatSword : MonoBehaviour
             }
         }
     }
-} 
+}

@@ -1,4 +1,3 @@
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,8 +11,9 @@ public class InputManager : MonoBehaviour
     private PlayerMovement movement;
     private Vector2 moveInput;
     private Vector2 cameraInput;
-    public GreatSword sword;
     private bool UIcursor = false;
+
+    private Player player;
 
     private void Awake()
     {
@@ -22,6 +22,8 @@ public class InputManager : MonoBehaviour
 
         movement = GetComponent<PlayerMovement>();
         movement.Initialized();
+
+        player = GetComponent<Player>();
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -46,10 +48,17 @@ public class InputManager : MonoBehaviour
         moveAction.Move.performed += MoveInput;
         moveAction.Look.performed += CameraInput;
         moveAction.Jump.performed += JumpInput;
+
         moveAction.Attack.performed += AttackInput;
         moveAction.Block.performed += BlockInput;
         moveAction.Block.canceled += BlockCancel;
         moveAction.Skill.performed += SkillInput;
+
+        moveAction.Reload.performed += ReloadInput;
+
+        moveAction.SelectSlot1.performed += Slot1_Select;
+        moveAction.SelectSlot2.performed += Slot2_Select;
+
         moveAction.CursorOn.performed += CursorOn;
         moveAction.CursorOn.canceled += CursorOff;
         moveAction.Interact.performed += InteractInput;
@@ -62,10 +71,15 @@ public class InputManager : MonoBehaviour
         moveAction.Move.performed -= MoveInput;
         moveAction.Look.performed -= CameraInput;
         moveAction.Jump.performed -= JumpInput;
+        
         moveAction.Attack.performed -= AttackInput;
         moveAction.Block.performed -= BlockInput;
         moveAction.Block.canceled -= BlockCancel;
         moveAction.Skill.performed -= SkillInput;
+        
+        moveAction.SelectSlot1.performed -= Slot1_Select;
+        moveAction.SelectSlot2.performed -= Slot2_Select;
+        
         moveAction.CursorOn.performed -= CursorOn;
         moveAction.CursorOn.canceled -= CursorOff;
         moveAction.Interact.performed -= InteractInput;
@@ -92,27 +106,51 @@ public class InputManager : MonoBehaviour
     private void AttackInput(InputAction.CallbackContext context)
     {
         if (UIcursor) return;
-        movement.Attack();
+        player.currentWeapon.Attack();
     }
 
     private void BlockInput(InputAction.CallbackContext context)
     {
-        if (sword.currentStamina <= 0) return;
+        if (UIcursor) return;
 
-        sword.GuardState(true);
-        movement.Guard(true);
+        var weapon = player.currentWeapon;
+        if (weapon != null && weapon.CanGuard())
+        {
+            weapon.Guard(true);
+        }
     }
 
     private void BlockCancel(InputAction.CallbackContext context)
     {
-        sword.GuardState(false);
-        movement.Guard(false);
+        player.currentWeapon?.Guard(false);
     }
 
     private void SkillInput(InputAction.CallbackContext context)
     {
-        if (sword.CheckCoolTimeSkillAble() == false) return;
-        movement.Skill();
+        if (UIcursor) return;
+
+        var weapon = player.currentWeapon;
+        if (weapon != null && weapon.CanSkill())
+        {
+            weapon.Skill();
+        }
+    }
+
+    private void ReloadInput(InputAction.CallbackContext context)
+    {
+        if (UIcursor) return;
+        
+        player.currentWeapon?.Reload();
+    }
+
+    private void Slot1_Select(InputAction.CallbackContext context)
+    {
+        player.EquipWeaponByIndex(0);
+    }
+
+    private void Slot2_Select(InputAction.CallbackContext context)
+    {
+        player.EquipWeaponByIndex(1);
     }
 
     private void CursorOn(InputAction.CallbackContext context)
