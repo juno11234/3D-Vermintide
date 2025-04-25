@@ -5,7 +5,7 @@ using TMPro;
 
 public class PlayerMovement : MonoBehaviour
 {
-    //이동 로직과 애니메이션, 상호작용
+    //이동 로직과 애니메이션
     private static readonly int ATTACK = Animator.StringToHash("Attack");
     private static readonly int BLOCK = Animator.StringToHash("Block");
     private static readonly int SKILL = Animator.StringToHash("Skill");

@@ -8,7 +8,7 @@ using DG.Tweening;
 
 public class Player : MonoBehaviour, IFighter
 {
-    //스탯, 데미지 입기, 공격 판정
+    //스탯, 데미지 입기
     [System.Serializable]
     public class PlayerStat
     {
@@ -61,13 +61,13 @@ public class Player : MonoBehaviour, IFighter
         Vector3 currentEuler = transform.eulerAngles;
         Vector3 targetEuler = new Vector3(currentEuler.x, currentEuler.y, 90f);
 
-        transform//코루틴대신 닷트윈사용
+        transform
             .DORotate(targetEuler, 1f / stat.dieSpeed)
             .SetEase(Ease.OutBounce)
             .OnComplete(() => { SceneManager.LoadScene(1); });
     }
 
-    IEnumerator DieCoroutine()//닷트윈 이전 코루틴
+    IEnumerator DieCoroutine()
     {
         Quaternion current = transform.rotation;
         Vector3 currentEuler = transform.rotation.eulerAngles;
@@ -97,7 +97,6 @@ public class Player : MonoBehaviour, IFighter
 
     public void SkillStart()
     {
-        greatSword.currentSkillGage = 0;
         greatSword.skill.gameObject.SetActive(true);
     }
 
