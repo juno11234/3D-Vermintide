@@ -15,6 +15,9 @@ public class Player : MonoBehaviour, IFighter
         public float dieSpeed = 0.5f;
         public int hp = 100;
         public int maxHp = 100;
+
+        public float knockbackDistance = 2f;
+        public float knbackDuration = 0.5f;
     }
 
     public static Player CurrentPlayer;
@@ -37,11 +40,11 @@ public class Player : MonoBehaviour, IFighter
     public bool getCannonBall;
     public Collider MainCollider => controller;
     public GameObject GameObject => gameObject;
+    public bool isKnockBack = false;
 
     private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
-        stat = new PlayerStat();
         stat.hp = stat.maxHp;
         CurrentPlayer = this;
         controller = GetComponent<CharacterController>();
@@ -100,6 +103,21 @@ public class Player : MonoBehaviour, IFighter
         {
             stat.hp = stat.maxHp;
         }
+    }
+
+    public void KnockBack(Vector3 point)
+    {
+        if (isKnockBack) return;
+
+        isKnockBack = true;
+        Vector3 direction = (transform.position - point).normalized;
+        Vector3 targetPosition = transform.position + direction * stat.knockbackDistance;
+
+        DOTween.To(
+            () => Vector3.zero,
+            x => { controller.Move(direction * x.magnitude); }, 
+            Vector3.one * stat.knockbackDistance, stat.knbackDuration
+        ).OnComplete(() => { isKnockBack = false; });
     }
 
     public void TakeDamage(CombatEvents combatEvent)

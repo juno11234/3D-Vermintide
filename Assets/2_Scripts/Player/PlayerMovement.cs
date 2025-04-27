@@ -23,7 +23,7 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField]
     private TMP_Text interactText;
-    
+
     CharacterController controller;
     Camera cam;
     float xRotation;
@@ -40,6 +40,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void Move(Vector2 input)
     {
+        if (Player.CurrentPlayer.isKnockBack) return;
+        
         Vector3 moveDir = Vector3.zero;
         moveDir.x = input.x;
         moveDir.z = input.y;
