@@ -95,8 +95,6 @@ public class GreatSword : WeaponBase
     //가드로직
     public override void Guard(bool isGuard)
     {
-        if (CanGuard() == false) return;
-
         isGuarding = isGuard;
         animator.SetBool(BLOCK, isGuard);
     }

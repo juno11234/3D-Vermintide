@@ -115959,7 +115959,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 8
-  mouseSensitivity: 50
+  mouseSensitivity: 0.2
   jumpHeight: 2
   gravity: -9.81
   interactDistance: 1.5

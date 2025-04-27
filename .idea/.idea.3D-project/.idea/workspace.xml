@@ -13,6 +13,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/2_Scripts/Interactive/CannonBall.cs" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
 }</component>
@@ -93,6 +96,7 @@
       <workItem from="1745130287760" duration="8044000" />
       <workItem from="1745672127658" duration="1131000" />
       <workItem from="1745720500298" duration="5745000" />
+      <workItem from="1745750842922" duration="3321000" />
     </task>
     <servers />
   </component>

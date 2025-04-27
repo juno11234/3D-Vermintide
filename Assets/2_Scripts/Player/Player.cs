@@ -34,6 +34,7 @@ public class Player : MonoBehaviour, IFighter
     public WeaponBase currentWeapon { get; private set; }
 
     public GreatSwordSkill skill;
+    public bool getCannonBall;
     public Collider MainCollider => controller;
     public GameObject GameObject => gameObject;
 
@@ -44,6 +45,7 @@ public class Player : MonoBehaviour, IFighter
         stat.hp = stat.maxHp;
         CurrentPlayer = this;
         controller = GetComponent<CharacterController>();
+        getCannonBall = false;
     }
 
     private void Start()

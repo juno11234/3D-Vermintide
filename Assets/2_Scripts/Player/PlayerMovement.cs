@@ -23,7 +23,7 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField]
     private TMP_Text interactText;
-
+    
     CharacterController controller;
     Camera cam;
     float xRotation;
@@ -36,7 +36,6 @@ public class PlayerMovement : MonoBehaviour
         interactText.gameObject.SetActive(false);
         controller = GetComponent<CharacterController>();
         cam = Camera.main;
-       
     }
 
     public void Move(Vector2 input)
@@ -56,11 +55,11 @@ public class PlayerMovement : MonoBehaviour
     {
         float mouseX = input.x;
         float mouseY = input.y;
-        xRotation -= mouseY * Time.deltaTime * mouseSensitivity;
+        xRotation -= mouseY * mouseSensitivity;
         xRotation = Mathf.Clamp(xRotation, -80f, 80f);
         cam.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
 
-        transform.Rotate(Vector3.up * (mouseX * Time.deltaTime * mouseSensitivity));
+        transform.Rotate(Vector3.up * (mouseX * mouseSensitivity));
     }
 
     public void Jump()
@@ -70,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
             velocity.y = Mathf.Sqrt(jumpHeight * -1f * gravity);
         }
     }
-    
+
 
     public void ShowInteractText()
     {
