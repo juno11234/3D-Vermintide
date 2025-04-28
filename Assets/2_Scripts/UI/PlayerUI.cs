@@ -16,6 +16,7 @@ public class PlayerUI : MonoBehaviour
     public GameObject guardGage;
 
     public Slider bossHpSlider;
+    
 
 
     private void Start()

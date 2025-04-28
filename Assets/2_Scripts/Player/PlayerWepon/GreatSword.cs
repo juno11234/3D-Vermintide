@@ -39,9 +39,7 @@ public class GreatSword : WeaponBase
 
         collider = GetComponent<Collider>();
         collider.enabled = false;
-
-       
-
+        
         CombatSystem.Instance.Events.OnEnemyDieEvents += SkillGagePlus;
     }
 

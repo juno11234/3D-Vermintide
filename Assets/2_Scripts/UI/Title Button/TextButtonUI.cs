@@ -19,6 +19,12 @@ public abstract class TextButtonUI : MonoBehaviour, IPointerEnterHandler, IPoint
         originalColor = buttonText.color;
     }
 
+    private void OnEnable()
+    {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
+
     public abstract void ButtonClicked();
 
     public void OnPointerEnter(PointerEventData eventData)

@@ -134,6 +134,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Menu"",
+                    ""type"": ""Button"",
+                    ""id"": ""9a740837-f39a-42b8-95a4-84f700600e22"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -312,6 +321,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""SelectSlot3"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""14d7dfe1-1301-41f3-9d24-810ebb92294f"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Menu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -332,6 +352,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_PlayerMovement_SelectSlot1 = m_PlayerMovement.FindAction("SelectSlot1", throwIfNotFound: true);
         m_PlayerMovement_SelectSlot2 = m_PlayerMovement.FindAction("SelectSlot2", throwIfNotFound: true);
         m_PlayerMovement_SelectSlot3 = m_PlayerMovement.FindAction("SelectSlot3", throwIfNotFound: true);
+        m_PlayerMovement_Menu = m_PlayerMovement.FindAction("Menu", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -405,6 +426,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerMovement_SelectSlot1;
     private readonly InputAction m_PlayerMovement_SelectSlot2;
     private readonly InputAction m_PlayerMovement_SelectSlot3;
+    private readonly InputAction m_PlayerMovement_Menu;
     public struct PlayerMovementActions
     {
         private @PlayerInput m_Wrapper;
@@ -421,6 +443,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @SelectSlot1 => m_Wrapper.m_PlayerMovement_SelectSlot1;
         public InputAction @SelectSlot2 => m_Wrapper.m_PlayerMovement_SelectSlot2;
         public InputAction @SelectSlot3 => m_Wrapper.m_PlayerMovement_SelectSlot3;
+        public InputAction @Menu => m_Wrapper.m_PlayerMovement_Menu;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMovement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -466,6 +489,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @SelectSlot3.started += instance.OnSelectSlot3;
             @SelectSlot3.performed += instance.OnSelectSlot3;
             @SelectSlot3.canceled += instance.OnSelectSlot3;
+            @Menu.started += instance.OnMenu;
+            @Menu.performed += instance.OnMenu;
+            @Menu.canceled += instance.OnMenu;
         }
 
         private void UnregisterCallbacks(IPlayerMovementActions instance)
@@ -506,6 +532,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @SelectSlot3.started -= instance.OnSelectSlot3;
             @SelectSlot3.performed -= instance.OnSelectSlot3;
             @SelectSlot3.canceled -= instance.OnSelectSlot3;
+            @Menu.started -= instance.OnMenu;
+            @Menu.performed -= instance.OnMenu;
+            @Menu.canceled -= instance.OnMenu;
         }
 
         public void RemoveCallbacks(IPlayerMovementActions instance)
@@ -537,5 +566,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnSelectSlot1(InputAction.CallbackContext context);
         void OnSelectSlot2(InputAction.CallbackContext context);
         void OnSelectSlot3(InputAction.CallbackContext context);
+        void OnMenu(InputAction.CallbackContext context);
     }
 }

@@ -12,6 +12,7 @@ public class InputManager : MonoBehaviour
     private Vector2 moveInput;
     private Vector2 cameraInput;
     private bool UIcursor = false;
+    public GameObject escapeUI;
 
     private Player player;
 
@@ -63,6 +64,8 @@ public class InputManager : MonoBehaviour
         moveAction.CursorOn.performed += CursorOn;
         moveAction.CursorOn.canceled += CursorOff;
         moveAction.Interact.performed += InteractInput;
+
+        moveAction.Menu.performed += EscapeInput;
     }
 
     private void OnDisable()
@@ -85,6 +88,8 @@ public class InputManager : MonoBehaviour
         moveAction.CursorOn.performed -= CursorOn;
         moveAction.CursorOn.canceled -= CursorOff;
         moveAction.Interact.performed -= InteractInput;
+        
+        moveAction.Menu.performed -= EscapeInput;
     }
 
     #region inputSetting
@@ -178,6 +183,11 @@ public class InputManager : MonoBehaviour
     private void InteractInput(InputAction.CallbackContext context)
     {
         movement.TryInteract();
+    }
+
+    private void EscapeInput(InputAction.CallbackContext context)
+    {
+        escapeUI.SetActive(true);
     }
 
     #endregion
