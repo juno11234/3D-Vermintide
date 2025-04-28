@@ -82,4 +82,13 @@ public class PatrolGoblin : GoblinBase
         animator.SetFloat(SPEED, 1);
         agent.speed = 6f;
     }
+    protected override void Die()
+    {
+        EnemyDieEvents e = new EnemyDieEvents();
+        CombatSystem.Instance.AddInGameEvent(e);
+        animator.SetTrigger("Dead");
+        isDead = true;
+        collider.enabled = false;
+        agent.enabled = false;
+    }
 }

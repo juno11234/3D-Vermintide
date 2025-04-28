@@ -25,9 +25,14 @@ public class BossSpawn : MonoBehaviour, IInteractable
     {
         energyCharge.Play();
         yield return new WaitForSeconds(energyCharge.main.duration);
+        
         explode.Play();
         Player.CurrentPlayer.KnockBack(transform.position);
+        
         yield return new WaitForSeconds(0.2f);
+        
+        MissionText.Instance.TextUpdate("Kill the golem");
+        
         Boss.CurrentBoss.gameObject.SetActive(true);
         bossDoor.SetActive(true);
         Destroy(this.gameObject);

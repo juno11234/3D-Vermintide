@@ -9,6 +9,7 @@ public class CaveCrystal : MonoBehaviour, IInteractable
     public void Interact()
     {
         Destroy(Door);
+        MissionText.Instance.TextUpdate("A door opened somewhere");
         Destroy(gameObject);
     }
 

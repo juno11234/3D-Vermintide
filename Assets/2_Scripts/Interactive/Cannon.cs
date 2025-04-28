@@ -21,11 +21,17 @@ public class Cannon : MonoBehaviour, IInteractable
             Player.CurrentPlayer.getCannonBall = false;
             if (fireCount < 2)
             {
+                MissionText.Instance.TextUpdate($"Find the Cannonball and fire it. {fireCount} / 3 ");
                 WaveSystem.Instance.WaveStart(15);
-                WaveSystem.Instance.set.waveDelay = 30;
+                WaveSystem.Instance.set.waveDelay = 20;
             }
-            if (fireCount > 2)
+
+            else if (fireCount == 2)
+                MissionText.Instance.TextUpdate($"Find the Cannonball and fire it. {fireCount} / 3 ");
+
+            else if (fireCount > 2)
             {
+                MissionText.Instance.TextUpdate("Destroy the staff");
                 WaveSystem.Instance.set.waveDelay = 180;
                 Destroy(rock);
                 this.enabled = false;
