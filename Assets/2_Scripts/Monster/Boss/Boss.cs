@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -36,6 +37,7 @@ public class Boss : MonoBehaviour, IFighter
     public BossState CurrentState { get; private set; }
     public BossParts BossParts;
     public Animator animator;
+    public PlayerUI playerUI;
     public bool isDead { get; private set; }
 
     private Dictionary<BossState.StateName, BossState> stateDictionary =
@@ -71,6 +73,14 @@ public class Boss : MonoBehaviour, IFighter
         }
 
         ChageState(BossState.StateName.ChaseState);
+        gameObject.SetActive(false);
+    }
+
+    private void OnEnable()
+    {
+        playerUI.bossHpSlider.gameObject.SetActive(true);
+        playerUI.bossHpSlider.maxValue = Stat.MaxHP;
+        playerUI.bossHpSlider.value = Stat.HP;
     }
 
     public void ChageState(BossState.StateName enterState)
@@ -93,6 +103,7 @@ public class Boss : MonoBehaviour, IFighter
     {
         if (isDead) return;
         Stat.HP -= combatEvent.Damage;
+        playerUI.bossHpSlider.value = Stat.HP;
         //Debug.Log(Stat.HP);
         if (Stat.HP <= 0)
         {

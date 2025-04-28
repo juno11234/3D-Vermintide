@@ -3,17 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ExitPortal : MonoBehaviour
-{    
+{
+    private Portal portal;
+
     void Awake()
     {
-       gameObject.SetActive(false);
+        portal = GetComponentInChildren<Portal>();
+        portal.gameObject.SetActive(false);
     }
 
     void Update()
     {
         if (Boss.CurrentBoss.isDead)
         {
-            gameObject.SetActive(true);
+            portal.gameObject.SetActive(true);
         }
     }
 }

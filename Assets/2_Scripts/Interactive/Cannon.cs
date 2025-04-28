@@ -22,7 +22,7 @@ public class Cannon : MonoBehaviour, IInteractable
             if (fireCount < 2)
             {
                 WaveSystem.Instance.WaveStart(15);
-                WaveSystem.Instance.set.waveDelay = 15;
+                WaveSystem.Instance.set.waveDelay = 30;
             }
             if (fireCount > 2)
             {

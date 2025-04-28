@@ -15,14 +15,18 @@ public class PlayerUI : MonoBehaviour
     public Image[] guardGageImage;
     public GameObject guardGage;
 
+    public Slider bossHpSlider;
+
 
     private void Start()
     {
         player = Player.CurrentPlayer;
         hpSlider.maxValue = player.stat.maxHp;
         skillSlider.maxValue = greatSword.maxSkillGage;
-    }
 
+        bossHpSlider.gameObject.SetActive(false);
+    }
+    
     void Update()
     {
         hpSlider.value = player.stat.hp;

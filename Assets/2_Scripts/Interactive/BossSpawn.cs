@@ -6,10 +6,7 @@ public class BossSpawn : MonoBehaviour, IInteractable
 {
     //후에 펑 소리와 함께 플레이어 밀쳐짐
     //보스 생성후 웨이브 조절 
-
-    [SerializeField]
-    GameObject boss;
-
+    
     [SerializeField]
     private GameObject bossDoor;
 
@@ -31,7 +28,7 @@ public class BossSpawn : MonoBehaviour, IInteractable
         explode.Play();
         Player.CurrentPlayer.KnockBack(transform.position);
         yield return new WaitForSeconds(0.2f);
-        boss.SetActive(true);
+        Boss.CurrentBoss.gameObject.SetActive(true);
         bossDoor.SetActive(true);
         Destroy(this.gameObject);
     }
