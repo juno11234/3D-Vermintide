@@ -23,7 +23,7 @@ public class InputManager : MonoBehaviour
         movement = GetComponent<PlayerMovement>();
         movement.Initialized();
 
-        player = GetComponent<Player>();
+        player = Player.CurrentPlayer;
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -58,6 +58,7 @@ public class InputManager : MonoBehaviour
 
         moveAction.SelectSlot1.performed += Slot1_Select;
         moveAction.SelectSlot2.performed += Slot2_Select;
+        moveAction.SelectSlot3.performed += Slot3_Select;
 
         moveAction.CursorOn.performed += CursorOn;
         moveAction.CursorOn.canceled += CursorOff;
@@ -71,15 +72,16 @@ public class InputManager : MonoBehaviour
         moveAction.Move.performed -= MoveInput;
         moveAction.Look.performed -= CameraInput;
         moveAction.Jump.performed -= JumpInput;
-        
+
         moveAction.Attack.performed -= AttackInput;
         moveAction.Block.performed -= BlockInput;
         moveAction.Block.canceled -= BlockCancel;
         moveAction.Skill.performed -= SkillInput;
-        
+
         moveAction.SelectSlot1.performed -= Slot1_Select;
         moveAction.SelectSlot2.performed -= Slot2_Select;
-        
+        moveAction.SelectSlot3.performed -= Slot3_Select;
+
         moveAction.CursorOn.performed -= CursorOn;
         moveAction.CursorOn.canceled -= CursorOff;
         moveAction.Interact.performed -= InteractInput;
@@ -139,7 +141,7 @@ public class InputManager : MonoBehaviour
     private void ReloadInput(InputAction.CallbackContext context)
     {
         if (UIcursor) return;
-        
+
         player.currentWeapon?.Reload();
     }
 
@@ -151,6 +153,12 @@ public class InputManager : MonoBehaviour
     private void Slot2_Select(InputAction.CallbackContext context)
     {
         player.EquipWeaponByIndex(1);
+    }
+
+    private void Slot3_Select(InputAction.CallbackContext context)
+    {
+        if (Player.CurrentPlayer.hasPotion == false) return;
+        player.EquipWeaponByIndex(2);
     }
 
     private void CursorOn(InputAction.CallbackContext context)

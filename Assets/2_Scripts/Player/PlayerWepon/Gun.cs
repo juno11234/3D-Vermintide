@@ -7,9 +7,6 @@ using TMPro;
 public class Gun : WeaponBase
 {
     [SerializeField]
-    private int totalAmmo = 10;
-
-    [SerializeField]
     private int maxAmmo = 5;
 
     [SerializeField]
@@ -29,7 +26,10 @@ public class Gun : WeaponBase
 
     [SerializeField]
     private TMP_Text ammoText;
-    
+
+    [SerializeField]
+    private int totalAmmo = 10;
+
     private int currentAmmo;
     private bool isReloading = false;
     private Animator animator;
@@ -38,6 +38,7 @@ public class Gun : WeaponBase
     {
         currentAmmo = maxAmmo;
     }
+
     private void Start()
     {
         gameObject.SetActive(false);
@@ -98,7 +99,7 @@ public class Gun : WeaponBase
         isReloading = false;
     }
 
-    private void UpdateAmmoText()
+    public void UpdateAmmoText()
     {
         ammoText.text = $"{currentAmmo} / {totalAmmo}";
     }
@@ -106,5 +107,6 @@ public class Gun : WeaponBase
     public void GetAmmo(int ammo)
     {
         totalAmmo += ammo;
+        UpdateAmmoText();
     }
 }

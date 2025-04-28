@@ -34,6 +34,8 @@ public class Player : MonoBehaviour, IFighter
     [SerializeField]
     private WeaponBase[] weaponSlots;
 
+    
+
     public WeaponBase currentWeapon { get; private set; }
 
     public GreatSwordSkill skill;
@@ -41,6 +43,7 @@ public class Player : MonoBehaviour, IFighter
     public Collider MainCollider => controller;
     public GameObject GameObject => gameObject;
     public bool isKnockBack = false;
+    public bool hasPotion = false;
 
     private void Awake()
     {
@@ -115,7 +118,7 @@ public class Player : MonoBehaviour, IFighter
 
         DOTween.To(
             () => Vector3.zero,
-            x => { controller.Move(direction * x.magnitude); }, 
+            x => { controller.Move(direction * x.magnitude); },
             Vector3.one * stat.knockbackDistance, stat.knbackDuration
         ).OnComplete(() => { isKnockBack = false; });
     }
@@ -148,4 +151,6 @@ public class Player : MonoBehaviour, IFighter
             .SetEase(Ease.OutBounce)
             .OnComplete(() => { SceneManager.LoadScene(1); });
     }
+
+  
 }

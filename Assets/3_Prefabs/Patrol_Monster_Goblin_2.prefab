@@ -1061,8 +1061,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goblinStat:
-    hp: 30
-    maxHp: 30
+    hp: 20
+    maxHp: 20
     range: 1.2
   viewAngle: 120
   viewDistance: 10
