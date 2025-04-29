@@ -702,6 +702,7 @@ MonoBehaviour:
     leftLegColl: {fileID: 7319931576424148397}
     rightLegColl: {fileID: 1375981805632306558}
   animator: {fileID: 1298863880313831561}
+  playerUI: {fileID: 0}
 --- !u!1 &3524256708677932348
 GameObject:
   m_ObjectHideFlags: 0
@@ -1629,6 +1630,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collider: {fileID: 1396145441406531196}
+  damage: 20
 --- !u!1 &7365556090751153722
 GameObject:
   m_ObjectHideFlags: 0
@@ -1993,6 +1995,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collider: {fileID: 6226912003698245662}
+  damage: 30
 --- !u!1 &8382621219788230790
 GameObject:
   m_ObjectHideFlags: 0

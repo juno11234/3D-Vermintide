@@ -12,7 +12,7 @@ public class BossPartNode
 
 [System.Serializable]
 public class BossParts
-{
+{//피격판정을 위해 콜라이더 모아주는 클래스
     public Collider bodyColl;
     public Collider leftArmColl;
     public Collider rightArmColl;

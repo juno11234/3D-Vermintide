@@ -114,11 +114,12 @@ public class Player : MonoBehaviour, IFighter
 
         isKnockBack = true;
         Vector3 direction = (transform.position - point).normalized;
+        Vector3 knockBackDirection = (direction + Vector3.up).normalized;
         Vector3 targetPosition = transform.position + direction * stat.knockbackDistance;
 
         DOTween.To(
             () => Vector3.zero,
-            x => { controller.Move(direction * x.magnitude); },
+            x => { controller.Move(knockBackDirection * x.magnitude); },
             Vector3.one * stat.knockbackDistance, stat.knbackDuration
         ).OnComplete(() => { isKnockBack = false; });
     }

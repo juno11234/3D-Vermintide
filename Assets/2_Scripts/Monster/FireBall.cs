@@ -44,5 +44,9 @@ public class FireBall : MonoBehaviour
             fireball.Clear();
             CombatSystem.Instance.AddInGameEvent(e);
         }
+        else if(other.gameObject.layer==LayerMask.NameToLayer("Ground"))
+        {
+            Destroy(gameObject);
+        }
     }
 }

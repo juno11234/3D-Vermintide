@@ -18,7 +18,7 @@ public class Potion : WeaponBase
     {
         if (Player.CurrentPlayer.hasPotion)
         {
-            Player.CurrentPlayer.Heal(30);
+            Player.CurrentPlayer.Heal(50);
             Player.CurrentPlayer.hasPotion = false;
             Player.CurrentPlayer.EquipWeaponByIndex(0);
         }

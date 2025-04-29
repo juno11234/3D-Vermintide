@@ -12,7 +12,7 @@ public class FootAttack : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.Equals(Player.CurrentPlayer.MainCollider))
+        if (other.Equals(Player.CurrentPlayer.MainCollider) && Boss.CurrentBoss.isDead == false)
         {
             CombatEvents e = new CombatEvents();
             e.Sender = Boss.CurrentBoss;
@@ -22,6 +22,7 @@ public class FootAttack : MonoBehaviour
             e.Collider = other;
 
             CombatSystem.Instance.AddInGameEvent(e);
+            Player.CurrentPlayer.KnockBack(transform.position);
         }
     }
 }
