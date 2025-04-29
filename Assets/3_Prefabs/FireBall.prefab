@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1199041657773117522}
   - component: {fileID: 691756468286133776}
   - component: {fileID: 5565296759129754335}
+  - component: {fileID: 5015586323497181112}
   m_Layer: 0
   m_Name: FireBall
   m_TagString: Untagged
@@ -74,6 +75,33 @@ MonoBehaviour:
   shamonGoblin: {fileID: 7184634167701913823, guid: 9450b7e1b6a1b5347a9b7663bb061b48, type: 3}
   explosion: {fileID: 4327653860355214065}
   fireball: {fileID: 1663923694105432017}
+--- !u!54 &5015586323497181112
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6801752712328695402}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &1573789635644709753
 PrefabInstance:
   m_ObjectHideFlags: 0
