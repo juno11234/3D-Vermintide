@@ -26,11 +26,12 @@ public class ChaseState : BossState
         bossAttacks = new[] { Boss.JUMPATTACK, Boss.FOOTATTACK };
         animator = boss.animator;
         agent = boss.GetComponent<NavMeshAgent>();
-        player=Player.CurrentPlayer;
+        player = Player.CurrentPlayer;
     }
 
     private void Update()
     {
+        if (Boss.CurrentBoss.isDead) return;
         float distance = Vector3.Distance(player.transform.position, boss.transform.position);
 
         if (distance < attackRange)

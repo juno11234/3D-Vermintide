@@ -9,12 +9,14 @@ public class GetPotion : MonoBehaviour, IInteractable
 
     public void Interact()
     {
+        if(Player.CurrentPlayer.hasPotion) return;
         potion.GetPotion();
         Destroy(gameObject);
     }
 
     public string InteractText()
     {
+        if (Player.CurrentPlayer.hasPotion) return "Already have the potion";
         return "[E] Get Potion";
     }
 }

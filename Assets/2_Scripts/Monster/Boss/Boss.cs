@@ -36,6 +36,7 @@ public class Boss : MonoBehaviour, IFighter
     public BossParts BossParts;
     public Animator animator;
     public PlayerUI playerUI;
+    private NavMeshAgent navMeshAgent;
     public bool isDead { get; private set; }
 
     private Dictionary<BossState.StateName, BossState> stateDictionary =
@@ -53,6 +54,7 @@ public class Boss : MonoBehaviour, IFighter
 
     void Start()
     {
+        navMeshAgent = GetComponent<NavMeshAgent>();
         BossParts.Initialize();
         var bossPartsArray = BossParts.BossNodeArray;
 
@@ -111,6 +113,7 @@ public class Boss : MonoBehaviour, IFighter
 
     private void Die()
     {
+       
         animator.SetTrigger("Dead");
         isDead = true;
     }

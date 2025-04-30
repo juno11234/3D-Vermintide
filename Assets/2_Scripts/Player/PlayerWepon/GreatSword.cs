@@ -11,11 +11,10 @@ public class GreatSword : WeaponBase
     private static readonly int SKILL = Animator.StringToHash("Skill");
 
     //무기 데미지, 가드, 스킬등을 담당
-    [SerializeField]
-    private float staminaCooldown = 3f;
+
 
     [SerializeField]
-    private float staminaRegenTime = 1f;
+    private WeaponCool cool;
 
     private Collider collider;
     private int damage = 10;
@@ -23,30 +22,15 @@ public class GreatSword : WeaponBase
     public int maxGuardStamina = 4;
     public float maxSkillGage = 90f;
 
-    public int currentStamina { get; private set; }
-    private float regenTimer;
-    public float currentSkillGage;
-    private bool inCooldown = false;
     public bool isGuarding = false;
     private Animator animator;
-    
 
     private void Start()
     {
         animator = GetComponentInParent<Animator>();
-        currentStamina = maxGuardStamina;
-        currentSkillGage = maxSkillGage;
 
         collider = GetComponent<Collider>();
         collider.enabled = false;
-        
-        CombatSystem.Instance.Events.OnEnemyDieEvents += SkillGagePlus;
-    }
-
-    private void Update()
-    {
-        GuardStaminaRegen();
-        SkillGageUpdate();
     }
 
     //공격로직
@@ -70,24 +54,13 @@ public class GreatSword : WeaponBase
     public override void Skill()
     {
         if (CanSkill() == false) return;
-        currentSkillGage = 0;
+        cool.currentSkillGage = 0;
         animator.SetTrigger(SKILL);
     }
 
     public override bool CanSkill()
     {
-        return currentSkillGage >= maxSkillGage;
-    }
-
-    private void SkillGageUpdate()
-    {
-        currentSkillGage += Time.deltaTime;
-        currentSkillGage = Mathf.Min(currentSkillGage, maxSkillGage);
-    }
-
-    private void SkillGagePlus(EnemyDieEvents enemyDieEvents)
-    {
-        currentSkillGage += 0.5f;
+        return cool.currentSkillGage >= maxSkillGage;
     }
 
     //가드로직
@@ -99,45 +72,33 @@ public class GreatSword : WeaponBase
 
     public override bool CanGuard()
     {
-        return currentStamina > 0 && inCooldown == false;
+        return cool.currentStamina > 0 && cool.inCooldown == false;
     }
-    
+
     public bool TryGuard(int damage)
     {
         if (CanGuard() == false || isGuarding == false) return false;
 
         int staminaConsume = damage / 5;
-        currentStamina -= staminaConsume;
+        cool.currentStamina -= staminaConsume;
 
-        if (currentStamina <= 0)
+        if (cool.currentStamina <= 0)
         {
-            currentStamina = 0;
+            cool.currentStamina = 0;
             animator.SetBool(BLOCK, false);
             StartCoroutine(GuardCoolCorutine());
+        }
+
+        IEnumerator GuardCoolCorutine()
+        {
+            cool.inCooldown = true;
+            yield return new WaitForSeconds(cool.staminaCooldown);
+            cool.inCooldown = false;
         }
 
         return true;
     }
 
-    IEnumerator GuardCoolCorutine()
-    {
-        inCooldown = true;
-        yield return new WaitForSeconds(staminaCooldown);
-        inCooldown = false;
-    }
-
-    private void GuardStaminaRegen()
-    {
-        if (inCooldown || currentStamina >= maxGuardStamina) return;
-
-        regenTimer += Time.deltaTime;
-        if (regenTimer >= staminaRegenTime)
-        {
-            currentStamina++;
-            regenTimer = 0f;
-        }
-    }
-    
     private void OnTriggerEnter(Collider other)
     {
         if (LayerMask.NameToLayer("Enemy") == other.gameObject.layer)

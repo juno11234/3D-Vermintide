@@ -11,12 +11,11 @@ public class PlayerUI : MonoBehaviour
 
     public Slider skillSlider;
     public GreatSword greatSword;
-
+    public WeaponCool cool;
     public Image[] guardGageImage;
     public GameObject guardGage;
 
     public Slider bossHpSlider;
-    
 
 
     private void Start()
@@ -27,18 +26,18 @@ public class PlayerUI : MonoBehaviour
 
         bossHpSlider.gameObject.SetActive(false);
     }
-    
+
     void Update()
     {
         hpSlider.value = player.stat.hp;
-        skillSlider.value = greatSword.currentSkillGage;
+        skillSlider.value = cool.currentSkillGage;
 
         if (greatSword.isGuarding)
         {
             guardGage.SetActive(true);
             for (int i = 0; i < guardGageImage.Length; i++)
             {
-                if (i < greatSword.currentStamina)
+                if (i < cool.currentStamina)
                 {
                     guardGageImage[i].gameObject.SetActive(true);
                 }

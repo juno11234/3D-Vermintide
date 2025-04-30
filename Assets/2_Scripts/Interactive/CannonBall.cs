@@ -14,6 +14,7 @@ public class CannonBall : MonoBehaviour, IInteractable
 
     public string InteractText()
     {
+        if(Player.CurrentPlayer.getCannonBall) return "Already have the cannon ball";
         return "[E] Pick up";
     }
 }
