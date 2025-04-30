@@ -26112,6 +26112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animatorController: {fileID: 9100000, guid: fd5f4262b6d25e540a775e7163fb3b97, type: 2}
+  skillparticle: {fileID: 1594343763828314668}
   cool: {fileID: 8329455912246097293}
   maxGuardStamina: 4
   maxSkillGage: 60
@@ -56189,7 +56190,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   greatSword: {fileID: 6471592869778062995}
   currentSkillGage: 0
+  maxSkillGage: 0
   currentStamina: 0
+  maxStamina: 0
   inCooldown: 0
   staminaCooldown: 3
 --- !u!1 &4113988552910978355
@@ -71290,7 +71293,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 1, b: 1, a: 1}
+      maxColor: {r: 1, g: 1, b: 1, a: 0.039215688}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -91467,7 +91470,7 @@ MonoBehaviour:
   mouseSensitivity: 0.2
   jumpHeight: 2
   gravity: -9.81
-  interactDistance: 1.5
+  interactDistance: 2
   interactText: {fileID: 3864695566731260511}
 --- !u!114 &7583262773606865263
 MonoBehaviour:
@@ -107728,7 +107731,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 1, b: 1, a: 1}
+      maxColor: {r: 1, g: 1, b: 1, a: 0.039215688}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}

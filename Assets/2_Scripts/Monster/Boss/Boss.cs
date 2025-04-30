@@ -5,11 +5,12 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class Boss : MonoBehaviour, IFighter
-{//피격과 상태전환을 해주는 클래스
+{
+    //피격과 상태전환을 해주는 클래스
     public static Boss CurrentBoss;
     public static readonly int JUMPATTACK = Animator.StringToHash("JumpAttack");
     public static readonly int FOOTATTACK = Animator.StringToHash("FootAttack");
-    
+
     public enum Parts
     {
         Unknow,
@@ -25,13 +26,13 @@ public class Boss : MonoBehaviour, IFighter
         public int HP { get; set; }
         public int MaxHP { get; set; }
     }
-    
+
     public Collider MainCollider => BossParts.bodyColl;
 
     public GameObject GameObject => gameObject;
 
     public BossStat Stat { get; private set; }
-
+    public BloodControll.BloodType bloodType => BloodControll.BloodType.Boss;
     public BossState CurrentState { get; private set; }
     public BossParts BossParts;
     public Animator animator;
@@ -113,7 +114,6 @@ public class Boss : MonoBehaviour, IFighter
 
     private void Die()
     {
-       
         animator.SetTrigger("Dead");
         isDead = true;
     }

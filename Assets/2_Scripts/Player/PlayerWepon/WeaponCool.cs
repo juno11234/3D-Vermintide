@@ -9,17 +9,18 @@ public class WeaponCool : MonoBehaviour
     GreatSword greatSword;
 
     public float currentSkillGage;
+    public float maxSkillGage;
+
     public int currentStamina;
-
-    private float maxSkillGage;
-    private int maxStamina;
-
+    public int maxStamina;
     private float regenTimer;
     public bool inCooldown = false;
-    
+
     public float staminaCooldown = 3f;
 
     float staminaRegenTime = 1f;
+
+ 
 
     private void Start()
     {
@@ -36,11 +37,15 @@ public class WeaponCool : MonoBehaviour
     {
         SkillGageUpdate();
         GuardStaminaRegen();
+        if (inCooldown)
+        {
+            StartCoroutine(GuardCoolCorutine());
+        }
     }
 
     private void SkillGageUpdate()
     {
-        if (currentSkillGage <= maxSkillGage)
+        if (currentSkillGage <=maxSkillGage)
         {
             currentSkillGage += Time.deltaTime;
         }
@@ -57,7 +62,7 @@ public class WeaponCool : MonoBehaviour
 
     private void GuardStaminaRegen()
     {
-        if (inCooldown || currentStamina >= maxStamina) return;
+        if (inCooldown || currentStamina >=maxStamina) return;
 
         regenTimer += Time.deltaTime;
         if (regenTimer >= staminaRegenTime)
@@ -66,6 +71,9 @@ public class WeaponCool : MonoBehaviour
             regenTimer = 0f;
         }
     }
-
-   
+    IEnumerator GuardCoolCorutine()
+    {
+        yield return new WaitForSeconds(staminaCooldown);
+        inCooldown = false;
+    }
 }

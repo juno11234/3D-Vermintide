@@ -351,10 +351,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de9f7bc9e907f4849972314f7bc7784a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startNormalizedTime: 0
-  endNormalizedTime: 1
-  secondStartNormalizedTime: 0
-  secondEndNormalizedTime: 1
+  startNormalizedTime: 0.09
+  endNormalizedTime: 0.75
+  secondStartNormalizedTime: 0.09
+  secondEndNormalizedTime: 0.75
 --- !u!1102 &2477492213480165909
 AnimatorState:
   serializedVersion: 6

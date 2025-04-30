@@ -8,11 +8,13 @@ public class GreatSword : WeaponBase
 {
     private static readonly int ATTACK = Animator.StringToHash("Attack");
     private static readonly int BLOCK = Animator.StringToHash("Block");
+
     private static readonly int SKILL = Animator.StringToHash("Skill");
 
     //무기 데미지, 가드, 스킬등을 담당
-
-
+    [SerializeField]
+    private ParticleSystem skillparticle;
+    
     [SerializeField]
     private WeaponCool cool;
 
@@ -54,6 +56,7 @@ public class GreatSword : WeaponBase
     public override void Skill()
     {
         if (CanSkill() == false) return;
+        skillparticle.Play();
         cool.currentSkillGage = 0;
         animator.SetTrigger(SKILL);
     }
@@ -86,14 +89,7 @@ public class GreatSword : WeaponBase
         {
             cool.currentStamina = 0;
             animator.SetBool(BLOCK, false);
-            StartCoroutine(GuardCoolCorutine());
-        }
-
-        IEnumerator GuardCoolCorutine()
-        {
             cool.inCooldown = true;
-            yield return new WaitForSeconds(cool.staminaCooldown);
-            cool.inCooldown = false;
         }
 
         return true;

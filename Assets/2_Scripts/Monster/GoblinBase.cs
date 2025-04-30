@@ -22,7 +22,7 @@ public abstract class GoblinBase : MonoBehaviour, IFighter, IObjectPoolItem
     public Collider MainCollider => collider;
     public string Key { get; set; }
     public GameObject GameObject => gameObject;
-
+    public BloodControll.BloodType bloodType => BloodControll.BloodType.Monster;
     protected Player player;
 
     [SerializeField]

@@ -34,7 +34,7 @@ public class Player : MonoBehaviour, IFighter
     [SerializeField]
     private WeaponBase[] weaponSlots;
 
-    
+    public BloodControll.BloodType bloodType => BloodControll.BloodType.Player;
 
     public WeaponBase currentWeapon { get; private set; }
 
@@ -152,6 +152,4 @@ public class Player : MonoBehaviour, IFighter
             .SetEase(Ease.OutBounce)
             .OnComplete(() => { SceneManager.LoadScene(1); });
     }
-
-  
 }
