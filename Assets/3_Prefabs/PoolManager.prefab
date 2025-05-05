@@ -47,17 +47,25 @@ MonoBehaviour:
   ObjectPoolDatas:
   - Key: Goblin_1
     Prefab: {fileID: 4695364229230301723, guid: aeaadb9063fc20f488e79b745aca5138, type: 3}
-    ExpandSize: 60
+    ExpandSize: 120
     Parent: {fileID: 1660732112350554487}
   - Key: Goblin_2
     Prefab: {fileID: 3013121357060944080, guid: a3f58c3414692834baa07c5948c2ddc7, type: 3}
-    ExpandSize: 60
+    ExpandSize: 120
     Parent: {fileID: 1660732112350554487}
   - Key: Goblin_Elite
     Prefab: {fileID: 2271884593270564407, guid: 835eb9b255c92f94d8a9f321f90dbb15, type: 3}
-    ExpandSize: 10
+    ExpandSize: 20
     Parent: {fileID: 1660732112350554487}
   - Key: Goblin_Shaman
     Prefab: {fileID: 7656056336263378022, guid: 9450b7e1b6a1b5347a9b7663bb061b48, type: 3}
-    ExpandSize: 6
+    ExpandSize: 20
+    Parent: {fileID: 1660732112350554487}
+  - Key: Blood
+    Prefab: {fileID: 3600873040108913683, guid: 7da21e6f50d4a5549b835140a6c5696c, type: 3}
+    ExpandSize: 20
+    Parent: {fileID: 1660732112350554487}
+  - Key: BossBlood
+    Prefab: {fileID: 4277023787350057683, guid: 2f03f13e0660fb242b0a651286754e7b, type: 3}
+    ExpandSize: 5
     Parent: {fileID: 1660732112350554487}

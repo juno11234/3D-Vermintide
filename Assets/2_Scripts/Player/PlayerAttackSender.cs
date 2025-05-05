@@ -15,7 +15,9 @@ public class PlayerAttackSender : StateMachineBehaviour
     private bool passEndNormalizedTime;
     
     private Player player;
-  
+
+    [SerializeField]
+    private SFXData attack1;
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         passStartNormalizedTime = false;
@@ -28,6 +30,7 @@ public class PlayerAttackSender : StateMachineBehaviour
       
         if (passStartNormalizedTime==false && startNormalizedTime < stateInfo.normalizedTime)
         {
+            SFXManager.Instance.Play(attack1);
             player.AttackStart();
             passStartNormalizedTime = true;
         }

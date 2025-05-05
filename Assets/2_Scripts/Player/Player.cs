@@ -34,6 +34,10 @@ public class Player : MonoBehaviour, IFighter
     [SerializeField]
     private WeaponBase[] weaponSlots;
 
+    [SerializeField]
+    private SFXData hit;
+    [SerializeField]
+    private SFXData guard;
     public BloodControll.BloodType bloodType => BloodControll.BloodType.Player;
 
     public WeaponBase currentWeapon { get; private set; }
@@ -128,11 +132,12 @@ public class Player : MonoBehaviour, IFighter
     {
         if (currentWeapon is GreatSword sword && sword.TryGuard(combatEvent.Damage))
         {
+            SFXManager.Instance.Play(guard);
             return;
         }
 
         if (isDead) return;
-
+        SFXManager.Instance.Play(hit);
         stat.hp -= combatEvent.Damage;
         if (stat.hp <= 0)
         {

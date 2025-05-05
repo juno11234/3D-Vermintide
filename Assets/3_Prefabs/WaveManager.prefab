@@ -50,9 +50,13 @@ MonoBehaviour:
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
     lastWaveTimer: 0
     waveDelay: 180
-    spawnAmount: 20
-    defalutWaveEliteRate: 10
+    timerWaveAmount: 15
+    defalutWaveEliteRate: 7
     eliteWaveRate: 10
     eliteSpawnAmount: 10
+  waveCounter: 0
+  waveSFX: {fileID: 11400000, guid: cc70f2e53a1f6e349bacfcdf45e458aa, type: 2}

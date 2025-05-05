@@ -10512,6 +10512,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4efed45ad9e07cb49849c75066330b57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hit:
+  - {fileID: 11400000, guid: 281b43a55c6609e41bd732edf164635f, type: 2}
+  - {fileID: 11400000, guid: 6334ea6e6f48d6b43b5df678ca5f8102, type: 2}
 --- !u!1 &1206265679633794177
 GameObject:
   m_ObjectHideFlags: 0
@@ -26114,6 +26117,12 @@ MonoBehaviour:
   animatorController: {fileID: 9100000, guid: fd5f4262b6d25e540a775e7163fb3b97, type: 2}
   skillparticle: {fileID: 1594343763828314668}
   cool: {fileID: 8329455912246097293}
+  hit:
+  - {fileID: 11400000, guid: 281b43a55c6609e41bd732edf164635f, type: 2}
+  - {fileID: 11400000, guid: 6334ea6e6f48d6b43b5df678ca5f8102, type: 2}
+  - {fileID: 11400000, guid: 638fb19f43311564886fb16a60042d95, type: 2}
+  - {fileID: 11400000, guid: 25d0d3535a447cc44869c28ba75d9ef6, type: 2}
+  - {fileID: 11400000, guid: 9e47060278bf33749abf0e2cf04f396b, type: 2}
   maxGuardStamina: 4
   maxSkillGage: 60
   isGuarding: 0
@@ -81073,6 +81082,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1179279263023258429}
+  - component: {fileID: 2731190306790598340}
   m_Layer: 0
   m_Name: GreatSwordParticle
   m_TagString: Untagged
@@ -81098,6 +81108,20 @@ Transform:
   - {fileID: 3645540369755843365}
   m_Father: {fileID: 6393703457137324639}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2731190306790598340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5619755356065651627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdb6d3cf000a9b64abd365688eeae72e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attack1: {fileID: 4495073421504372287}
+  attack2: {fileID: 0}
 --- !u!1 &5621439163782583796
 GameObject:
   m_ObjectHideFlags: 0
@@ -91509,6 +91533,8 @@ MonoBehaviour:
   - {fileID: 6471592869778062995}
   - {fileID: 5828130846208796624}
   - {fileID: 6933369863435991980}
+  hit: {fileID: 11400000, guid: eb32880d46cff734d9456e18df5485a9, type: 2}
+  guard: {fileID: 11400000, guid: 3d6c637721d475f44bb3472e4948cc4d, type: 2}
   skill: {fileID: 0}
   getCannonBall: 0
   isKnockBack: 0
@@ -118019,6 +118045,7 @@ MonoBehaviour:
   muzzleFlash: {fileID: 4572871752143773969}
   ammoText: {fileID: 5198227669123910277}
   totalAmmo: 10
+  sfx_attack: {fileID: 11400000, guid: 3364f6667afa61941b2d797ded2cfb3f, type: 2}
 --- !u!1 &9147348837448022681
 GameObject:
   m_ObjectHideFlags: 0

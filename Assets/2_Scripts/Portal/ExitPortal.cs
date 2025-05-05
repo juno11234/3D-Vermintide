@@ -20,11 +20,12 @@ public class ExitPortal : MonoBehaviour
     {
         if (Boss.CurrentBoss.isDead && count == 0)
         {
+            
             MissionText.Instance.TextUpdate("Escape to the starting position!");
             Destroy(cLoseDoor);
             WaveSystem.Instance.WaveStart(15);
-
             WaveSystem.Instance.set.waveDelay = 10;
+            BGMManager.Instance.ChangeBGM(GameState.Escape);
             portal.gameObject.SetActive(true);
             count++;
         }

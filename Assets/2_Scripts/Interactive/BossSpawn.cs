@@ -34,6 +34,7 @@ public class BossSpawn : MonoBehaviour, IInteractable
         MissionText.Instance.TextUpdate("Kill the golem");
         
         Boss.CurrentBoss.gameObject.SetActive(true);
+        BGMManager.Instance.ChangeBGM(GameState.Boss);
         bossDoor.SetActive(true);
         Destroy(this.gameObject);
     }

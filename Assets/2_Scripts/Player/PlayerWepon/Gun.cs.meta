@@ -3,7 +3,12 @@ guid: a2a35dbaf84bd8342868e4f879491367
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - animatorController: {instanceID: 0}
+  - firePoint: {instanceID: 0}
+  - muzzleFlash: {instanceID: 0}
+  - ammoText: {instanceID: 0}
+  - sfx_attack: {fileID: 11400000, guid: 3364f6667afa61941b2d797ded2cfb3f, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

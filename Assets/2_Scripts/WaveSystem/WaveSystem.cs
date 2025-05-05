@@ -28,10 +28,19 @@ public class WaveSystem : MonoBehaviour
     public static WaveSystem Instance;
     public WaveSetting set;
     private Transform[] nearPoint;
+    public int waveCounter = 0;
+
+    [SerializeField]
+    private SFXData waveSFX;
 
     private void Awake()
     {
         Instance = this;
+    }
+
+    private void Start()
+    {
+        CombatSystem.Instance.Events.OnEnemyDieEvents += WaveCount;
     }
 
     void Update()
@@ -45,6 +54,14 @@ public class WaveSystem : MonoBehaviour
     {
         set.lastWaveTimer = 0f;
         nearPoint = SpawnPointSet();
+        SFXManager.Instance.Play(waveSFX);
+        if (Boss.CurrentBoss.isDead == false)
+        {
+            BGMManager.Instance.ChangeBGM(GameState.Wave);
+        }
+
+        if (waveCounter <= 0) waveCounter = 0;
+
         StartCoroutine(SpawnDelay(amount));
     }
 
@@ -52,6 +69,7 @@ public class WaveSystem : MonoBehaviour
     {
         if (Random.value <= set.eliteWaveRate / 100f)
         {
+            waveCounter += set.eliteSpawnAmount;
             for (int i = 0; i < set.eliteSpawnAmount; i++)
             {
                 ElliteWave();
@@ -60,12 +78,22 @@ public class WaveSystem : MonoBehaviour
         }
         else
         {
+            waveCounter += amount * 2;
             for (int i = 0; i < amount; i++)
             {
                 DefaultWave(nearPoint[0].position);
                 DefaultWave(nearPoint[1].position);
                 yield return new WaitForSeconds(0.3f);
             }
+        }
+    }
+
+    public void WaveCount(EnemyDieEvents enemyDieEvents)
+    {
+        waveCounter--;
+        if (waveCounter <= 1)
+        {
+            BGMManager.Instance.ChangeBGM(GameState.Dungeon);
         }
     }
 
@@ -100,9 +128,10 @@ public class WaveSystem : MonoBehaviour
     }
 
     private Transform[] SpawnPointSet()
-    {//스폰포인트 수만큼 배열로 만든다
-     //순환하면서 플레이어와 거리를 비교한다
-     //
+    {
+        //스폰포인트 수만큼 배열로 만든다
+        //순환하면서 플레이어와 거리를 비교한다
+        //
         float[] distance = new float[set.spawnPoint.Length];
         for (int i = 0; i < set.spawnPoint.Length; i++)
         {
@@ -116,12 +145,12 @@ public class WaveSystem : MonoBehaviour
 
         for (int i = 0; i < set.spawnPoint.Length; i++)
         {
-            if (distance[i] < min)//min보다 작다면
+            if (distance[i] < min) //min보다 작다면
             {
-                min2 = min;//처음것을 두번째min에 덮어씌움
+                min2 = min; //처음것을 두번째min에 덮어씌움
                 second = first;
 
-                min = distance[i];//작은 것을 첫번째min에
+                min = distance[i]; //작은 것을 첫번째min에
                 first = i;
             }
             else if (distance[i] < min2)

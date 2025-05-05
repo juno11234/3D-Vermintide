@@ -3,20 +3,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public class GreatSword : WeaponBase
 {
     private static readonly int ATTACK = Animator.StringToHash("Attack");
     private static readonly int BLOCK = Animator.StringToHash("Block");
-
     private static readonly int SKILL = Animator.StringToHash("Skill");
 
     //무기 데미지, 가드, 스킬등을 담당
     [SerializeField]
     private ParticleSystem skillparticle;
-    
+
     [SerializeField]
     private WeaponCool cool;
+
+    [SerializeField]
+    private List<SFXData> hit;
 
     private Collider collider;
     private int damage = 10;
@@ -99,6 +102,8 @@ public class GreatSword : WeaponBase
     {
         if (LayerMask.NameToLayer("Enemy") == other.gameObject.layer)
         {
+            int index = Random.Range(0, hit.Count);
+            SFXManager.Instance.Play(hit[index]);
             //Debug.Log("공격!");
             var monster = CombatSystem.Instance.GetMonsterOrNull(other);
             if (monster != null)

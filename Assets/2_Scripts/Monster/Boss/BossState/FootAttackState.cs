@@ -23,7 +23,7 @@ public class FootAttackState : BossState
         var currentState = animator.GetCurrentAnimatorStateInfo(0);
         if (currentState.IsName(animatorStateName) == false) return;
         
-        if (currentState.normalizedTime > 0.75)
+        if (currentState.normalizedTime > 0.7)
             footAttack.gameObject.SetActive(false);
         else if (currentState.normalizedTime > 0.4)
             footAttack.gameObject.SetActive(true);

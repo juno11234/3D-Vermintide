@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Serialization;
 
 public class Gun : WeaponBase
 {
@@ -29,6 +30,9 @@ public class Gun : WeaponBase
 
     [SerializeField]
     private int totalAmmo = 10;
+    [FormerlySerializedAs("clip")]
+    [SerializeField]
+    private SFXData sfx_attack;
 
     private int currentAmmo;
     private bool isReloading = false;
@@ -53,6 +57,8 @@ public class Gun : WeaponBase
     public override void Attack()
     {
         if (isReloading || currentAmmo <= 0) return;
+       
+        SFXManager.Instance.Play(sfx_attack);
         currentAmmo--;
         UpdateAmmoText();
         muzzleFlash.Play();
