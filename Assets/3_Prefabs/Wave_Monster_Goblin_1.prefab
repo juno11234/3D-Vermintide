@@ -1028,6 +1028,11 @@ MonoBehaviour:
     hp: 20
     maxHp: 20
     range: 1.2
+  growlSounds:
+  - {fileID: 11400000, guid: 9e5cd4a9dccf4c346a0311fbdc156d89, type: 2}
+  - {fileID: 11400000, guid: fa10483e0e46502409151cdeb1c4a712, type: 2}
+  - {fileID: 11400000, guid: 7015a8385faa85543a29385384a93fbd, type: 2}
+  - {fileID: 11400000, guid: fd8d51648fb2a5446b373533c231c210, type: 2}
 --- !u!195 &735778803587093352
 NavMeshAgent:
   m_ObjectHideFlags: 0

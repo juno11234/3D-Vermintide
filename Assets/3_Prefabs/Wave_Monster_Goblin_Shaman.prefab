@@ -6817,6 +6817,11 @@ MonoBehaviour:
     hp: 30
     maxHp: 30
     range: 10
+  growlSounds:
+  - {fileID: 11400000, guid: 9e5cd4a9dccf4c346a0311fbdc156d89, type: 2}
+  - {fileID: 11400000, guid: fa10483e0e46502409151cdeb1c4a712, type: 2}
+  - {fileID: 11400000, guid: 7015a8385faa85543a29385384a93fbd, type: 2}
+  - {fileID: 11400000, guid: fd8d51648fb2a5446b373533c231c210, type: 2}
   fireBallPrefabs: {fileID: 6801752712328695402, guid: 410ba07f3a252cb4aaed062901bded58, type: 3}
   firePoint: {fileID: 6350145812130038428}
   particle: {fileID: 7789652488922126826}

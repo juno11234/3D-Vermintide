@@ -10,6 +10,9 @@ public class Cannon : MonoBehaviour, IInteractable
     [SerializeField]
     private GameObject rock;
 
+    [SerializeField]
+    private SFXData fireSFX;
+
     private int fireCount = 0;
 
     public void Interact()
@@ -17,12 +20,13 @@ public class Cannon : MonoBehaviour, IInteractable
         if (Player.CurrentPlayer.getCannonBall)
         {
             fire.Play();
+            SFXManager.Instance.Play(fireSFX);
             fireCount++;
             Player.CurrentPlayer.getCannonBall = false;
             if (fireCount < 2)
             {
                 MissionText.Instance.TextUpdate($"Find the Cannonball and fire it. {fireCount} / 3 ");
-                WaveSystem.Instance.WaveStart(15);
+                WaveSystem.Instance.WaveStart(10);
                 WaveSystem.Instance.set.waveDelay = 20;
             }
 

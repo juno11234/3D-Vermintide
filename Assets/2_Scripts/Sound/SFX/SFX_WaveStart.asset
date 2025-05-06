@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soundName: SFX_WaveStart
   clip: {fileID: 8300000, guid: 826d5cfbc74d871449157ff17986f47b, type: 3}
-  skip: 0.2
+  skip: 0
   volume: 2

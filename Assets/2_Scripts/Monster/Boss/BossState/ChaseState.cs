@@ -18,6 +18,9 @@ public class ChaseState : BossState
     [SerializeField]
     private float attackRange = 4f;
 
+    [SerializeField]
+    SFXData growlingSFX;
+
     public override StateName Name => StateName.ChaseState;
 
     public override void Initialize(Boss boss)
@@ -33,7 +36,7 @@ public class ChaseState : BossState
     {
         if (Boss.CurrentBoss.isDead) return;
         float distance = Vector3.Distance(player.transform.position, boss.transform.position);
-
+        SFXManager.Instance.PlayNoDuplicate(growlingSFX);
         if (distance < attackRange)
         {
             agent.ResetPath();

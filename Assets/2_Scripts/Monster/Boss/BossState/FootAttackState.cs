@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class FootAttackState : BossState
 {
+    [FormerlySerializedAs("footAttackSFX")]
+    [SerializeField]
+    private SFXData AttackSFX;
     public FootAttack footAttack;
     private Animator animator;
     private Boss boss;
@@ -26,7 +30,10 @@ public class FootAttackState : BossState
         if (currentState.normalizedTime > 0.7)
             footAttack.gameObject.SetActive(false);
         else if (currentState.normalizedTime > 0.4)
+        {
             footAttack.gameObject.SetActive(true);
+            SFXManager.Instance.PlayNoDuplicate(AttackSFX);
+        }
 
 
         if (currentState.normalizedTime > exitTime)

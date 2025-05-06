@@ -21,6 +21,9 @@ public class GreatSword : WeaponBase
     [SerializeField]
     private List<SFXData> hit;
 
+    [SerializeField]
+    private SFXData skill;
+
     private Collider collider;
     private int damage = 10;
 
@@ -60,8 +63,15 @@ public class GreatSword : WeaponBase
     {
         if (CanSkill() == false) return;
         skillparticle.Play();
+        StartCoroutine(skillCoroutine());
         cool.currentSkillGage = 0;
         animator.SetTrigger(SKILL);
+    }
+
+    private IEnumerator skillCoroutine()
+    {
+        yield return new WaitForSeconds(0.4f);
+        SFXManager.Instance.Play(skill);
     }
 
     public override bool CanSkill()

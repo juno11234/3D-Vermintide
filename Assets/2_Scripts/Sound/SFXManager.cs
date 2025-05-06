@@ -27,6 +27,32 @@ public class SFXManager : MonoBehaviour
         }
     }
 
+    public void PlayNoDuplicate(SFXData sfxData)
+    {
+        foreach (AudioSource source in audioSources)
+        {
+            if (source.isPlaying && source.clip == sfxData.clip)
+                return;
+        }
+
+        foreach (var sources in audioSources)
+        {
+            if (sources.isPlaying == false)
+            {
+                sources.clip = sfxData.clip;
+                sources.pitch = Random.Range(0.95f, 1.05f);
+                sources.volume = sfxData.volume;
+                if (sfxData.skip > 0f)
+                {
+                    sources.time = sfxData.skip;
+                }
+
+                sources.Play();
+                return;
+            }
+        }
+    }
+
     public void Play(SFXData sfxData)
     {
         foreach (var sources in audioSources)
@@ -37,8 +63,9 @@ public class SFXManager : MonoBehaviour
                 sources.volume = sfxData.volume;
                 if (sfxData.skip > 0f)
                 {
-                    sources.time=sfxData.skip;
+                    sources.time = sfxData.skip;
                 }
+
                 sources.Play();
                 return;
             }

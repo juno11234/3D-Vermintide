@@ -26123,6 +26123,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 638fb19f43311564886fb16a60042d95, type: 2}
   - {fileID: 11400000, guid: 25d0d3535a447cc44869c28ba75d9ef6, type: 2}
   - {fileID: 11400000, guid: 9e47060278bf33749abf0e2cf04f396b, type: 2}
+  skill: {fileID: 11400000, guid: 8e897df63d21c794cac080df94bf12ba, type: 2}
   maxGuardStamina: 4
   maxSkillGage: 60
   isGuarding: 0
@@ -91525,8 +91526,8 @@ MonoBehaviour:
     dieSpeed: 0.5
     hp: 100
     maxHp: 100
-    knockbackDistance: 0.4
-    knbackDuration: 0.5
+    knockbackDistance: 0.3
+    knbackDuration: 0.4
   startWeapon: {fileID: 6471592869778062995}
   animator: {fileID: 0}
   weaponSlots:

@@ -8,6 +8,9 @@ public class JumpAttackState : BossState
     private Animator animator;
     private Boss boss;
 
+    [SerializeField]
+    private SFXData attack;
+
     public override StateName Name => StateName.JumpAttackState;
 
     public override void Initialize(Boss boss)
@@ -22,7 +25,10 @@ public class JumpAttackState : BossState
     {
         var currentState = animator.GetCurrentAnimatorStateInfo(0);
         if(currentState.IsName(animatorStateName)==false)return;
-
+        if (currentState.normalizedTime > 0.5)
+        {
+            SFXManager.Instance.PlayNoDuplicate(attack);
+        }
         if (currentState.normalizedTime > exitTime)
         {
             boss.ChageState(StateName.ChaseState);

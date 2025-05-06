@@ -47,6 +47,7 @@ MonoBehaviour:
   animatorStateName: JumpAttack
   exitTime: 0.9
   jumpAttack: {fileID: 3608965984208458462}
+  attack: {fileID: 0}
 --- !u!1 &194956229617952661
 GameObject:
   m_ObjectHideFlags: 0
@@ -124,6 +125,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animatorStateName: FootAttack
   exitTime: 0.9
+  AttackSFX: {fileID: 11400000, guid: e9906b14fc3bd1349b7a7f1049574d5e, type: 2}
   footAttack: {fileID: 752411393429877075}
 --- !u!1 &619354824158643112
 GameObject:
@@ -1710,6 +1712,7 @@ MonoBehaviour:
   animatorStateName: Idle
   exitTime: 0
   attackRange: 4
+  growlingSFX: {fileID: 11400000, guid: 037e9fc5305914d418f70a71a60bc4d0, type: 2}
 --- !u!1 &7782179373976194022
 GameObject:
   m_ObjectHideFlags: 0

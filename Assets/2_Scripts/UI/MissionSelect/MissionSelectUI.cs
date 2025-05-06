@@ -8,6 +8,9 @@ public class MissionSelectUI : MonoBehaviour
 {
     public StartPortal startPortal;
 
+    [SerializeField]
+    private SFXData portalSFX;
+
     void Start()
     {
         gameObject.SetActive(false);
@@ -16,6 +19,7 @@ public class MissionSelectUI : MonoBehaviour
     public void ClickStart()
     {
         startPortal.gameObject.SetActive(true);
+        SFXManager.Instance.Play(portalSFX);
         gameObject.SetActive(false);
     }
 

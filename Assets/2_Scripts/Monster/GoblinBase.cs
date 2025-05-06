@@ -28,6 +28,9 @@ public abstract class GoblinBase : MonoBehaviour, IFighter, IObjectPoolItem
     [SerializeField]
     protected GoblinStat goblinStat;
 
+    [SerializeField]
+    private List<SFXData> growlSounds;
+
     protected Animator animator;
     protected Collider collider;
     protected NavMeshAgent agent;
@@ -36,6 +39,10 @@ public abstract class GoblinBase : MonoBehaviour, IFighter, IObjectPoolItem
     protected GoblinWepon goblinWepon;
     protected bool isDead = false;
 
+    private float interval = 3f;
+    private float randomOffset = 1f;
+    private float growlDistance = 5f;
+    private float timer;
 
     protected void Start()
     {
@@ -56,6 +63,32 @@ public abstract class GoblinBase : MonoBehaviour, IFighter, IObjectPoolItem
     {
         if (isDead) return;
         UpdateCustom();
+
+        Growling();
+    }
+
+    private void Growling()
+    {
+        float distance = Vector3.Distance(transform.position, player.transform.position);
+        if (distance > growlDistance)
+        {
+            timer = 0;
+            return;
+        }
+
+        timer += Time.deltaTime;
+        float random = interval + Random.Range(-randomOffset, randomOffset);
+
+        if (timer >= random)
+        {
+            timer = 0f;
+
+            if (growlSounds.Count > 0 && Random.value < 0.6f)
+            {
+                int index = Random.Range(0, growlSounds.Count);
+                SFXManager.Instance.Play(growlSounds[index]);
+            }
+        }
     }
 
     protected virtual void UpdateCustom()

@@ -63,6 +63,7 @@ public class BGMManager : MonoBehaviour
             if (bgmSource.clip != clip)
             {
                 bgmSource.clip = clip;
+                bgmSource.volume = 0.4f;
                 bgmSource.Play();
             }
         }

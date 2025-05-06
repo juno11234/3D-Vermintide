@@ -4920,6 +4920,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08f362c2a16261242834e200ec315d37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  portalSFX: {fileID: 11400000, guid: 637601eb4bf4097439b9d25884e8a710, type: 2}
 --- !u!1 &2360460623243822992
 GameObject:
   m_ObjectHideFlags: 0

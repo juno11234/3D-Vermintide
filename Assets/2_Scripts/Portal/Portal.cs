@@ -6,6 +6,12 @@ using UnityEngine.SceneManagement;
 
 public class Portal : MonoBehaviour
 {
+   
+    private void OnEnable()
+    {
+        
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         int current = SceneManager.GetActiveScene().buildIndex;

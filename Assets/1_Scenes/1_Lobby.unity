@@ -938,6 +938,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Portal
       objectReference: {fileID: 0}
+    - target: {fileID: 193741930491588790, guid: 8b472a9e09e9b064989a3b8ce2456686, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1208991629841525611, guid: 8b472a9e09e9b064989a3b8ce2456686, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.2717781
@@ -17588,6 +17592,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startPortal: {fileID: 1830513418}
+  portalSFX: {fileID: 11400000, guid: 637601eb4bf4097439b9d25884e8a710, type: 2}
 --- !u!4 &1220655285 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 449052, guid: 939f27c57ef13654eafcf37ff873a454, type: 3}

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: SFX_Enemy_Hit 5
   m_EditorClassIdentifier: 
   soundName: Enemy_Hit_5
-  clip: {fileID: 8300000, guid: 2b6a2398d02ba41b6875e27d79d7beb8, type: 3}
+  clip: {fileID: 8300000, guid: 46273314cf5c7439698be18531e38e41, type: 3}
   skip: 0
   volume: 1
