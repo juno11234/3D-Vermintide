@@ -17,6 +17,8 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/f7237cf7abef49bfbb552d7eb076e422174200/a5/d691e69c/MonoBehaviour.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/2_Scripts/Interactive/BossSpawn.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/2_Scripts/Interactive/CannonBall.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/2_Scripts/Save/SavingSystem.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/2_Scripts/Save/SavingWrapper.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/2_Scripts/Sound/BGMManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/2_Scripts/Sound/LobbyBGM.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/2_Scripts/Sound/SFXData.cs" root0="FORCE_HIGHLIGHTING" />
@@ -118,6 +120,11 @@
       <workItem from="1746519340239" duration="1336000" />
       <workItem from="1746530489396" duration="5782000" />
       <workItem from="1746540341960" duration="2442000" />
+      <workItem from="1746572291987" duration="85000" />
+      <workItem from="1746614296521" duration="723000" />
+      <workItem from="1746615123025" duration="2007000" />
+      <workItem from="1747918208697" duration="148000" />
+      <workItem from="1750801826869" duration="24000" />
     </task>
     <servers />
   </component>
@@ -126,7 +133,6 @@
   </component>
   <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
   <component name="UnityProjectDiscoverer">
-    <option name="hasUnityReference" value="true" />
     <option name="unityProject" value="true" />
     <option name="unityProjectFolder" value="true" />
   </component>

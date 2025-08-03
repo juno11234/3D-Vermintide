@@ -24,10 +24,13 @@ public class InputManager : MonoBehaviour
         movement = GetComponent<PlayerMovement>();
         movement.Initialized();
 
-        player = Player.CurrentPlayer;
-
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+    }
+
+    private void Start()
+    {
+        player = Player.CurrentPlayer;
     }
 
     private void Update()
