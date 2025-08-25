@@ -54,7 +54,7 @@ public class Gun : WeaponBase
         UpdateAmmoText();
     }
 
-    public override void Attack()
+    public override void RMBClick()
     {
         if (isReloading || currentAmmo <= 0) return;
        

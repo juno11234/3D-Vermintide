@@ -14,7 +14,7 @@ public class Potion : WeaponBase
         animator = GetComponentInParent<Animator>();
     }
 
-    public override void Attack()
+    public override void RMBClick()
     {
         if (Player.CurrentPlayer.hasPotion)
         {

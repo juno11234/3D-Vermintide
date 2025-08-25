@@ -116,7 +116,7 @@ public class InputManager : MonoBehaviour
     private void AttackInput(InputAction.CallbackContext context)
     {
         if (UIcursor) return;
-        player.currentWeapon.Attack();
+        player.currentWeapon.RMBClick();
     }
 
     private void BlockInput(InputAction.CallbackContext context)
@@ -126,13 +126,13 @@ public class InputManager : MonoBehaviour
         var weapon = player.currentWeapon;
         if (weapon != null && weapon.CanGuard())
         {
-            weapon.Guard(true);
+            weapon.RightClick(true);
         }
     }
 
     private void BlockCancel(InputAction.CallbackContext context)
     {
-        player.currentWeapon?.Guard(false);
+        player.currentWeapon?.RightClick(false);
     }
 
     private void SkillInput(InputAction.CallbackContext context)

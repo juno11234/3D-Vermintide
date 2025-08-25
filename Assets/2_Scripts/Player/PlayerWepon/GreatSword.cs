@@ -42,7 +42,7 @@ public class GreatSword : WeaponBase
     }
 
     //공격로직
-    public override void Attack()
+    public override void RMBClick()
     {
         animator.ResetTrigger(ATTACK);
         animator.SetTrigger(ATTACK);
@@ -80,7 +80,7 @@ public class GreatSword : WeaponBase
     }
 
     //가드로직
-    public override void Guard(bool isGuard)
+    public override void RightClick(bool isGuard)
     {
         isGuarding = isGuard;
         animator.SetBool(BLOCK, isGuard);

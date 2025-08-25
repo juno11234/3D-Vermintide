@@ -40,7 +40,5 @@ public class PlayerAttackSender : StateMachineBehaviour
             player.AttackEnd();
             passEndNormalizedTime = true;
         }
-    }
-
-  
+    }  
 }
