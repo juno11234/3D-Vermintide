@@ -10512,6 +10512,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4efed45ad9e07cb49849c75066330b57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 100
   hit:
   - {fileID: 11400000, guid: 281b43a55c6609e41bd732edf164635f, type: 2}
   - {fileID: 11400000, guid: 6334ea6e6f48d6b43b5df678ca5f8102, type: 2}
@@ -118600,7 +118601,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7784956625589597732, guid: 28bb9fdcb43ec2146aa055159b869d0f, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 809
+      value: 850
       objectReference: {fileID: 0}
     - target: {fileID: 7784956625589597732, guid: 28bb9fdcb43ec2146aa055159b869d0f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
