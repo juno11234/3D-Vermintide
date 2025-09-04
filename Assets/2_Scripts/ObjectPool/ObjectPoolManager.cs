@@ -12,7 +12,7 @@ public class ObjectPoolManager : MonoBehaviour
     {
         public string Key;
         public GameObject Prefab;
-        public byte ExpandSize;
+        public int ExpandSize;
         public Transform Parent;
     }
 

@@ -54,10 +54,12 @@ public class CombatSystem : MonoBehaviour
 
     public void RegisterMonster(IFighter monster)
     {
-        if (monsterDictionary.TryAdd(monster.MainCollider, monster) == false)
         {
-            Debug.LogWarning($"{monster.GameObject.name}가 등록 " +
-                             $"{monsterDictionary[monster.MainCollider]}를 대체");
+            if (monsterDictionary.TryAdd(monster.MainCollider, monster) == false)
+            {
+                Debug.LogWarning($"{monster.GameObject.name}가 등록 " +
+                                 $"{monsterDictionary[monster.MainCollider]}를 대체");
+            }
         }
     }
 

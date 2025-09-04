@@ -118,12 +118,14 @@ public class GreatSword : WeaponBase
             var monster = CombatSystem.Instance.GetMonsterOrNull(other);
             if (monster != null)
             {
-                CombatEvents combatEvents = new CombatEvents();
-                combatEvents.Sender = Player.CurrentPlayer;
-                combatEvents.Receiver = monster;
-                combatEvents.Damage = damage;
-                combatEvents.HitPosition = other.ClosestPoint(transform.position);
-                combatEvents.Collider = other;
+                CombatEvents combatEvents = new CombatEvents()
+                {
+                    Sender = Player.CurrentPlayer,
+                    Receiver = monster,
+                    Damage = damage,
+                    HitPosition = other.ClosestPoint(transform.position),
+                    Collider = other
+                };
 
                 CombatSystem.Instance.AddInGameEvent(combatEvents);
             }

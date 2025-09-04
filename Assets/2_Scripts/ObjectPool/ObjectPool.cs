@@ -15,9 +15,9 @@ public class ObjectPool
     private Queue<IObjectPoolItem> Pool { get; set; }
     private IObjectPoolItem Item { get; set; }
     private Transform Parent { get; set; }
-    private byte ExpandSize { get; set; }
+    private int ExpandSize { get; set; }
 
-    public void Initialize(IObjectPoolItem item, Transform parent, byte expandSize, string key)
+    public void Initialize(IObjectPoolItem item, Transform parent, int expandSize, string key)
     {
         Pool = new Queue<IObjectPoolItem>();
         Item = item;
