@@ -34,7 +34,7 @@ public class ObjectPoolManager : MonoBehaviour
         }
     }
 
-    public void CreateObjectPool(ObjectPoolData data)
+    private void CreateObjectPool(ObjectPoolData data)
     {
         if (objectPoolDictionary.ContainsKey(data.Key))
         {

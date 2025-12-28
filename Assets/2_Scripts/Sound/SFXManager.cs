@@ -6,10 +6,9 @@ public class SFXManager : MonoBehaviour
 {
     public static SFXManager Instance;
 
-    [SerializeField]
-    private int poolSize = 10;
+    [SerializeField] private int poolSize = 10;
 
-    private List<AudioSource> audioSources = new List<AudioSource>();
+    private AudioSource[] audioSourcesArray;
 
     private void Awake()
     {
@@ -20,22 +19,23 @@ public class SFXManager : MonoBehaviour
             return;
         }
 
+        audioSourcesArray = new AudioSource[poolSize];
         for (int i = 0; i < poolSize; i++)
         {
             var sources = gameObject.AddComponent<AudioSource>();
-            audioSources.Add(sources);
+            audioSourcesArray[i] = sources;
         }
     }
 
     public void PlayNoDuplicate(SFXData sfxData)
     {
-        foreach (AudioSource source in audioSources)
+        foreach (AudioSource source in audioSourcesArray)
         {
             if (source.isPlaying && source.clip == sfxData.clip)
                 return;
         }
 
-        foreach (var sources in audioSources)
+        foreach (var sources in audioSourcesArray)
         {
             if (sources.isPlaying == false)
             {
@@ -55,7 +55,7 @@ public class SFXManager : MonoBehaviour
 
     public void Play(SFXData sfxData)
     {
-        foreach (var sources in audioSources)
+        foreach (var sources in audioSourcesArray)
         {
             if (sources.isPlaying == false)
             {

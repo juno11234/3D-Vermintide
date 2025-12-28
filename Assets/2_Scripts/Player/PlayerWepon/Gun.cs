@@ -105,7 +105,7 @@ public class Gun : WeaponBase
         isReloading = false;
     }
 
-    public void UpdateAmmoText()
+    private void UpdateAmmoText()
     {
         ammoText.text = $"{currentAmmo} / {totalAmmo}";
     }

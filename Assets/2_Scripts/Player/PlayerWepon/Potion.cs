@@ -5,13 +5,11 @@ using UnityEngine;
 
 public class Potion : WeaponBase
 {
-    private Animator animator; 
     
     private void Start()
     {
         Player.CurrentPlayer.hasPotion = false;
         gameObject.SetActive(false);
-        animator = GetComponentInParent<Animator>();
     }
 
     public override void RMBClick()

@@ -12,7 +12,8 @@ public class BossPartNode
 
 [System.Serializable]
 public class BossParts
-{//피격판정을 위해 콜라이더 모아주는 클래스
+{
+    //피격판정을 위해 콜라이더 모아주는 클래스
     public Collider bodyColl;
     public Collider leftArmColl;
     public Collider rightArmColl;
@@ -23,10 +24,16 @@ public class BossParts
 
     public void Initialize()
     {
-        Collider[] colliders = { bodyColl, leftArmColl, rightArmColl, leftLegColl, rightLegColl };
+        Collider[] colliders =
+        {
+            bodyColl, leftArmColl, rightArmColl, leftLegColl, rightLegColl
+        };
 
-        Parts[] parts = { Parts.Body, Parts.LeftArm, Parts.RightArm, Parts.LeftLeg, Parts.RightLeg };
-        
+        Parts[] parts =
+        {
+            Parts.Body, Parts.LeftArm, Parts.RightArm, Parts.LeftLeg, Parts.RightLeg
+        };
+
         BossNodeArray = new BossPartNode[colliders.Length];
 
         for (int i = 0; i < BossNodeArray.Length; i++)
@@ -41,7 +48,7 @@ public class BossParts
     {
         for (int i = 0; i < BossNodeArray.Length; i++)
         {
-            if (BossNodeArray[i].Collider == collider) 
+            if (BossNodeArray[i].Collider == collider)
                 return BossNodeArray[i].Part;
         }
 

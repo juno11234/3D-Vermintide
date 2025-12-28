@@ -9,6 +9,6 @@ public class SFXData : ScriptableObject
     public AudioClip clip;
     [Range(0f, 0.5f)]
     public float skip;
-    [Range(0, 2)]
+    [Range(0, 1)]
     public float volume = 1f;
 }

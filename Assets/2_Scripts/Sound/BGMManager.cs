@@ -27,7 +27,7 @@ public class BGMManager : MonoBehaviour
     private AudioSource bgmSource;
 
     [SerializeField]
-    private List<BGMData> bgmList;
+    private BGMData[] bgmArray;
 
     private Dictionary<GameState, AudioClip> bgmDict = new Dictionary<GameState, AudioClip>();
     private GameState currentState;
@@ -43,7 +43,7 @@ public class BGMManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
 
-        foreach (BGMData data in bgmList)
+        foreach (BGMData data in bgmArray)
         {
             if (bgmDict.ContainsKey(data.state) == false)
             {

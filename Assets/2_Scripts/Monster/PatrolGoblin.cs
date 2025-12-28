@@ -5,29 +5,22 @@ using UnityEngine;
 public class PatrolGoblin : GoblinBase
 {
     //정해진 구역 패트롤 플레이어 발각시 추격 사정거리내면 공격
-    [SerializeField]
-    private float viewAngle = 120;
+    [SerializeField] private float viewAngle = 120;
 
-    [SerializeField]
-    private float viewDistance = 10f;
+    [SerializeField] private float viewDistance = 10f;
 
-    [SerializeField]
-    private Transform[] patrolPoints;
+    [SerializeField] private Transform[] patrolPoints;
 
     bool isChasing = false;
     private Vector3 direction;
     int destinationIndex = 0;
-
-    protected new void Start()
+    
+    protected override void VirtualUpdate()
     {
-        base.Start(); // GoblinBase 초기화
-        CombatSystem.Instance.RegisterMonster(this);
-    }
-
-    protected override void UpdateCustom()
-    {
-        if (isChasing) base.UpdateCustom();
-
+        if (isChasing)
+        {
+            base.VirtualUpdate();
+        }
         else
         {
             Patrol();
@@ -35,7 +28,7 @@ public class PatrolGoblin : GoblinBase
         }
     }
 
-    void Patrol()
+    private void Patrol()
     {
         agent.SetDestination(patrolPoints[destinationIndex].position);
         animator.SetFloat(SPEED, 0.5f);
@@ -53,7 +46,7 @@ public class PatrolGoblin : GoblinBase
         }
     }
 
-    void WatchPlayer()
+    private void WatchPlayer()
     {
         if (goblinStat.hp < goblinStat.maxHp)
         {
@@ -75,20 +68,16 @@ public class PatrolGoblin : GoblinBase
         }
     }
 
-    void ChaseStart()
+    private void ChaseStart()
     {
         agent.ResetPath();
         isChasing = true;
         animator.SetFloat(SPEED, 1);
         agent.speed = 6f;
     }
-    protected override void Die()
+
+    protected override void PoolDeque()
     {
-        EnemyDieEvents e = new EnemyDieEvents();
-        CombatSystem.Instance.AddInGameEvent(e);
-        animator.SetTrigger("Dead");
-        isDead = true;
-        collider.enabled = false;
-        agent.enabled = false;
+        CombatSystem.Instance.RemoveMonster(this);
     }
 }

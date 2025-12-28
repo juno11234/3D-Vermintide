@@ -4,14 +4,11 @@ using UnityEngine;
 
 public class Cannon : MonoBehaviour, IInteractable
 {
-    [SerializeField]
-    private ParticleSystem fire;
+    [SerializeField] private ParticleSystem fire;
 
-    [SerializeField]
-    private GameObject rock;
+    [SerializeField] private GameObject rock;
 
-    [SerializeField]
-    private SFXData fireSFX;
+    [SerializeField] private SFXData fireSFX;
 
     private int fireCount = 0;
 
@@ -23,22 +20,23 @@ public class Cannon : MonoBehaviour, IInteractable
             SFXManager.Instance.Play(fireSFX);
             fireCount++;
             Player.CurrentPlayer.getCannonBall = false;
-            if (fireCount < 2)
+            
+            switch (fireCount)
             {
-                MissionText.Instance.TextUpdate($"Find the Cannonball and fire it. {fireCount} / 3 ");
-                WaveSystem.Instance.WaveStart(10);
-                WaveSystem.Instance.set.waveDelay = 20;
-            }
-
-            else if (fireCount == 2)
-                MissionText.Instance.TextUpdate($"Find the Cannonball and fire it. {fireCount} / 3 ");
-
-            else if (fireCount > 2)
-            {
-                MissionText.Instance.TextUpdate("Destroy the staff");
-                WaveSystem.Instance.set.waveDelay = 180;
-                Destroy(rock);
-                this.enabled = false;
+                case < 2:
+                    MissionText.Instance.TextUpdate($"Find the Cannonball and fire it. {fireCount} / 3 ");
+                    WaveSystem.Instance.WaveStart(10);
+                    WaveSystem.Instance.set.waveDelay = 20;
+                    break;
+                case 2:
+                    MissionText.Instance.TextUpdate($"Find the Cannonball and fire it. {fireCount} / 3 ");
+                    break;
+                case > 2:
+                    MissionText.Instance.TextUpdate("Destroy the staff");
+                    WaveSystem.Instance.set.waveDelay = 180;
+                    Destroy(rock);
+                    enabled = false;
+                    break;
             }
         }
     }

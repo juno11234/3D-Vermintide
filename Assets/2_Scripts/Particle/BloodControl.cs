@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BloodControll : MonoBehaviour
+public class BloodControl : MonoBehaviour
 {
     public enum BloodType
     {
@@ -26,14 +26,14 @@ public class BloodControll : MonoBehaviour
     {
         switch (combatEvent.Receiver.bloodType)
         {
-            case BloodControll.BloodType.Player:
+            case BloodType.Player:
                 return;
-            case BloodControll.BloodType.Monster:
+            case BloodType.Monster:
                 var blood = ObjectPoolManager.Instance.GetObjectOrNull("Blood");
                 blood.GameObject.transform.position = combatEvent.HitPosition;
                 blood.GameObject.SetActive(true);
                 break;
-            case BloodControll.BloodType.Boss:
+            case BloodType.Boss:
                 var Bossblood = ObjectPoolManager.Instance.GetObjectOrNull("BossBlood");
                 Bossblood.GameObject.transform.position = combatEvent.HitPosition;
                 Bossblood.GameObject.SetActive(true);

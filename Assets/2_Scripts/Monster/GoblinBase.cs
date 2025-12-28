@@ -6,9 +6,9 @@ using UnityEngine.AI;
 public abstract class GoblinBase : MonoBehaviour, IFighter, IObjectPoolItem
 {
     protected static readonly int SPEED = Animator.StringToHash("Speed");
-    protected static readonly int JUMP = Animator.StringToHash("Jump");
-    protected static readonly int ATTACK = Animator.StringToHash("Attack");
-    protected static readonly int HIT = Animator.StringToHash("Hit");
+    private static readonly int JUMP = Animator.StringToHash("Jump");
+    private static readonly int ATTACK = Animator.StringToHash("Attack");
+    private static readonly int HIT = Animator.StringToHash("Hit");
     private static readonly int DEAD = Animator.StringToHash("Dead");
 
     [System.Serializable]
@@ -22,35 +22,36 @@ public abstract class GoblinBase : MonoBehaviour, IFighter, IObjectPoolItem
     public Collider MainCollider => collider;
     public string Key { get; set; }
     public GameObject GameObject => gameObject;
-    public BloodControll.BloodType bloodType => BloodControll.BloodType.Monster;
-    protected Player player;
+    public BloodControl.BloodType bloodType => BloodControl.BloodType.Monster;
+    private Player player;
 
-    [SerializeField]
-    protected GoblinStat goblinStat;
+    [SerializeField] protected GoblinStat goblinStat;
 
-    [SerializeField]
-    private List<SFXData> growlSounds;
+    [SerializeField] private List<SFXData> growlSounds;
 
     protected Animator animator;
-    protected Collider collider;
+    private Collider collider;
     protected NavMeshAgent agent;
-    protected bool isJumping = false;
-    protected AnimatorStateInfo currentState;
-    protected GoblinWepon goblinWepon;
-    protected bool isDead = false;
+    private bool isJumping = false;
+    private AnimatorStateInfo currentState;
+    private GoblinWepon goblinWepon;
+    private bool isDead = false;
 
     private float interval = 3f;
     private float randomOffset = 1f;
     private float growlDistance = 5f;
     private float timer;
 
+    private Collider weaponColl;
     protected void Start()
     {
+        weaponColl = goblinWepon.GetComponent<Collider>();
         collider = GetComponent<Collider>();
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         player = Player.CurrentPlayer;
         goblinWepon = GetComponentInChildren<GoblinWepon>();
+        CombatSystem.Instance.RegisterMonster(this);
     }
 
 
@@ -62,7 +63,7 @@ public abstract class GoblinBase : MonoBehaviour, IFighter, IObjectPoolItem
     protected void Update()
     {
         if (isDead) return;
-        UpdateCustom();
+        VirtualUpdate();
 
         Growling();
     }
@@ -91,7 +92,7 @@ public abstract class GoblinBase : MonoBehaviour, IFighter, IObjectPoolItem
         }
     }
 
-    protected virtual void UpdateCustom()
+    protected virtual void VirtualUpdate()
     {
         float distance = Vector3.Distance(player.transform.position, transform.position);
         currentState = animator.GetCurrentAnimatorStateInfo(0);
@@ -106,7 +107,7 @@ public abstract class GoblinBase : MonoBehaviour, IFighter, IObjectPoolItem
         }
     }
 
-    protected void Chase()
+    private void Chase()
     {
         if (currentState.IsName("Attack")) return;
         agent.isStopped = false;
@@ -118,7 +119,7 @@ public abstract class GoblinBase : MonoBehaviour, IFighter, IObjectPoolItem
         }
     }
 
-    protected IEnumerator Jump()
+    private IEnumerator Jump()
     {
         isJumping = true;
         animator.SetTrigger(JUMP);
@@ -141,7 +142,7 @@ public abstract class GoblinBase : MonoBehaviour, IFighter, IObjectPoolItem
         isJumping = false;
     }
 
-    protected void Attack()
+    private void Attack()
     {
         if (currentState.IsName("Jump")) return;
 
@@ -156,17 +157,17 @@ public abstract class GoblinBase : MonoBehaviour, IFighter, IObjectPoolItem
         animator.SetTrigger(ATTACK);
     }
 
-    public void WeponCollOn()
+    public virtual void WeaponCollOn()
     {
-        goblinWepon.GetComponent<Collider>().enabled = true;
+        weaponColl.enabled = true;
     }
 
-    public void WeponCollOff()
+    public virtual void WeaponCollOff()
     {
-        goblinWepon.GetComponent<Collider>().enabled = false;
+        weaponColl.enabled = false;
     }
 
-    public virtual void TakeDamage(CombatEvents combatEvent)
+    public void TakeDamage(CombatEvents combatEvent)
     {
         if (isDead) return;
         goblinStat.hp -= combatEvent.Damage;
@@ -178,7 +179,7 @@ public abstract class GoblinBase : MonoBehaviour, IFighter, IObjectPoolItem
         else animator.SetTrigger(HIT);
     }
 
-    protected virtual void Die()
+    private void Die()
     {
         EnemyDieEvents e = new EnemyDieEvents();
         CombatSystem.Instance.AddInGameEvent(e);
@@ -186,11 +187,19 @@ public abstract class GoblinBase : MonoBehaviour, IFighter, IObjectPoolItem
         isDead = true;
         collider.enabled = false;
         agent.enabled = false;
-
-        StartCoroutine(DieDelay());
+        OffParticle();
+        PoolDeque();
     }
 
-    IEnumerator DieDelay()
+    protected virtual void PoolDeque()
+    {
+        StartCoroutine(DieDelay());
+    }
+    protected virtual void OffParticle()
+    {
+    }
+
+    private IEnumerator DieDelay()
     {
         yield return new WaitForSeconds(3f);
         ReturnToPool();

@@ -7,9 +7,7 @@ public abstract class WeaponBase : MonoBehaviour
 {
     [SerializeField] private RuntimeAnimatorController animatorController;
     public RuntimeAnimatorController AnimatorController => animatorController;
-    public virtual void RMBClick()
-    {
-    }
+    public abstract void RMBClick();
 
     public virtual void Skill()
     {

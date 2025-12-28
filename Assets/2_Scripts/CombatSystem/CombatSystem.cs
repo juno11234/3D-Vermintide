@@ -63,6 +63,11 @@ public class CombatSystem : MonoBehaviour
         }
     }
 
+    public void RemoveMonster(IFighter monster)
+    {
+        monsterDictionary.Remove(monster.MainCollider);
+    }
+
     public void RegisterBossMonster(Collider collider, IFighter monster)
     {
         if (monsterDictionary.TryAdd(collider, monster) == false)

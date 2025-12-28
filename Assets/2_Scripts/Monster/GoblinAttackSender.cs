@@ -42,24 +42,24 @@ public class GoblinAttackSender : StateMachineBehaviour
     {
         if (passStartNormalizedTime == false && startNormalizedTime < stateInfo.normalizedTime)
         {
-            goblin.WeponCollOn();
+            goblin.WeaponCollOn();
             passStartNormalizedTime = true;
         }
 
         if (passEndNormalizedTime == false && endNormalizedTime < stateInfo.normalizedTime)
         {
-            goblin.WeponCollOff();
+            goblin.WeaponCollOff();
             passEndNormalizedTime = true;
         }
 
         if (secondPassStartNormalizedTime == false && secondStartNormalizedTime < stateInfo.normalizedTime)
         {
-            goblin.WeponCollOn();
+            goblin.WeaponCollOn();
         }
 
         if (secondPassEndNormalizedTime == false && secondEndNormalizedTime < stateInfo.normalizedTime)
         {
-            goblin.WeponCollOff();
+            goblin.WeaponCollOff();
         }
     }
 

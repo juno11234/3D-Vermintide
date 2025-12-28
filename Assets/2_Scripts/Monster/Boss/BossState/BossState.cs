@@ -9,9 +9,7 @@ public abstract class BossState : MonoBehaviour
         ChaseState,
         JumpAttackState,
         FootAttackState,
-        GuardState,
-        DashAttackState,
-        StunState,
+       
     }
     
     public abstract StateName Name { get; }

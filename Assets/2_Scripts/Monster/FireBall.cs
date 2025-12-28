@@ -8,7 +8,7 @@ public class FireBall : MonoBehaviour
     public int damage = 10;
     public float speed = 10f;
     public float duration = 3f;
-    public ShamonGoblin shamonGoblin;
+    public ShamanGoblin shamanGoblin;
     public ParticleSystem explosion;
     public ParticleSystem fireball;
     float currentTime = 0f;
@@ -37,7 +37,7 @@ public class FireBall : MonoBehaviour
             CombatEvents e = new CombatEvents();
             e.Damage = damage;
             e.HitPosition = other.ClosestPoint(transform.position);
-            e.Sender = shamonGoblin;
+            e.Sender = shamanGoblin;
             e.Receiver = Player.CurrentPlayer;
             explosion.Play();
             fireball.Stop();

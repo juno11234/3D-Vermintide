@@ -63,7 +63,6 @@ public class GreatSword : WeaponBase
     {
         if (CanSkill() == false) return;
         skillparticle.Play();
-        StartCoroutine(skillCoroutine());
         cool.currentSkillGage = 0;
         animator.SetTrigger(SKILL);
     }

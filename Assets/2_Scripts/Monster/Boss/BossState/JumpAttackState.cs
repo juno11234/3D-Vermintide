@@ -20,6 +20,10 @@ public class JumpAttackState : BossState
         
         jumpAttack.gameObject.SetActive(false);
     }
+    public override void Enter()
+    {
+        jumpAttack.gameObject.SetActive(true);
+    }
 
     void Update()
     {
@@ -35,11 +39,7 @@ public class JumpAttackState : BossState
         }
     }
 
-    public override void Enter()
-    {
-        jumpAttack.gameObject.SetActive(true);
-    }
-
+ 
     public override void Exit()
     {
         jumpAttack.gameObject.SetActive(false);

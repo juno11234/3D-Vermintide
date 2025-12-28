@@ -38,7 +38,7 @@ public class Player : MonoBehaviour, IFighter
     private SFXData hit;
     [SerializeField]
     private SFXData guard;
-    public BloodControll.BloodType bloodType => BloodControll.BloodType.Player;
+    public BloodControl.BloodType bloodType => BloodControl.BloodType.Player;
 
     public WeaponBase currentWeapon { get; private set; }
 
@@ -65,7 +65,7 @@ public class Player : MonoBehaviour, IFighter
         skill.gameObject.SetActive(false);
     }
 
-    public void EquipWeapon(WeaponBase weapon)
+    private void EquipWeapon(WeaponBase weapon)
     {
         if (currentWeapon != null)
             currentWeapon.gameObject.SetActive(false);

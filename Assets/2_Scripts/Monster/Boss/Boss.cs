@@ -32,7 +32,7 @@ public class Boss : MonoBehaviour, IFighter
     public GameObject GameObject => gameObject;
 
     public BossStat Stat { get; private set; }
-    public BloodControll.BloodType bloodType => BloodControll.BloodType.Boss;
+    public BloodControl.BloodType bloodType => BloodControl.BloodType.Boss;
     public BossState CurrentState { get; private set; }
     public BossParts BossParts;
     public Animator animator;

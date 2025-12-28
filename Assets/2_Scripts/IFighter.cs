@@ -9,5 +9,5 @@ public interface IFighter
 
     public void TakeDamage(CombatEvents combatEvent);
 
-    BloodControll.BloodType bloodType { get; }
+    BloodControl.BloodType bloodType { get; }
 }

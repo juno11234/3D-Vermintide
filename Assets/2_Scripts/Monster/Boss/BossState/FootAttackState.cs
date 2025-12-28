@@ -5,9 +5,9 @@ using UnityEngine.Serialization;
 
 public class FootAttackState : BossState
 {
-    [FormerlySerializedAs("footAttackSFX")]
-    [SerializeField]
+    [FormerlySerializedAs("footAttackSFX")] [SerializeField]
     private SFXData AttackSFX;
+
     public FootAttack footAttack;
     private Animator animator;
     private Boss boss;
@@ -22,11 +22,15 @@ public class FootAttackState : BossState
         footAttack.gameObject.SetActive(false);
     }
 
+    public override void Enter()
+    {
+    }
+
     void Update()
     {
         var currentState = animator.GetCurrentAnimatorStateInfo(0);
         if (currentState.IsName(animatorStateName) == false) return;
-        
+
         if (currentState.normalizedTime > 0.7)
             footAttack.gameObject.SetActive(false);
         else if (currentState.normalizedTime > 0.4)
@@ -42,9 +46,6 @@ public class FootAttackState : BossState
         }
     }
 
-    public override void Enter()
-    {
-    }
 
     public override void Exit()
     {

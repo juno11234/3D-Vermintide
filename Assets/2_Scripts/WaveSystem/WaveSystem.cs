@@ -19,7 +19,7 @@ public class WaveSystem : MonoBehaviour
         public float lastWaveTimer = 0f;
         public float waveDelay;
         public int timerWaveAmount;
-        public float defalutWaveEliteRate;
+        public float waveEliteRate;
 
         public float eliteWaveRate = 10;
         public int eliteSpawnAmount = 10;
@@ -72,7 +72,7 @@ public class WaveSystem : MonoBehaviour
             waveCounter += set.eliteSpawnAmount;
             for (int i = 0; i < set.eliteSpawnAmount; i++)
             {
-                ElliteWave();
+                EliteWave();
                 yield return new WaitForSeconds(0.3f);
             }
         }
@@ -88,7 +88,7 @@ public class WaveSystem : MonoBehaviour
         }
     }
 
-    public void WaveCount(EnemyDieEvents enemyDieEvents)
+    private void WaveCount(EnemyDieEvents enemyDieEvents)
     {
         waveCounter--;
         if (waveCounter <= 1)
@@ -101,7 +101,7 @@ public class WaveSystem : MonoBehaviour
     {
         IObjectPoolItem horde;
 
-        if (Random.value <= set.defalutWaveEliteRate / 100f)
+        if (Random.value <= set.waveEliteRate / 100f)
         {
             string eliteType = Random.Range(0, 2) == 0 ? "Goblin_Elite" : "Goblin_Shaman";
             horde = ObjectPoolManager.Instance.GetObjectOrNull(eliteType);
@@ -116,7 +116,7 @@ public class WaveSystem : MonoBehaviour
         horde.GameObject.SetActive(true);
     }
 
-    private void ElliteWave()
+    private void EliteWave()
     {
         IObjectPoolItem horde;
 
@@ -129,8 +129,6 @@ public class WaveSystem : MonoBehaviour
 
     private Transform[] SpawnPointSet()
     {
-        
-
         float[] distance = new float[set.spawnPoint.Length];
 
         //순환하면서 플레이어와 거리를 비교한다       
@@ -164,6 +162,6 @@ public class WaveSystem : MonoBehaviour
             }
         }
 
-        return new Transform[] { set.spawnPoint[first], set.spawnPoint[second] };
+        return new[] { set.spawnPoint[first], set.spawnPoint[second] };
     }
 }
